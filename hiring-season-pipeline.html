@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUU Hiring Season Pipeline · Mt. Logos</title>
+<meta name="description" content="A free, offline recruiting toolkit for SUU accounting students — track every firm from first contact to offer, plan your CPA timeline, and compare where to live. Built by Mt. Logos.">
+<meta name="author" content="Mt. Logos">
+<meta name="theme-color" content="#BA0C2F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='140%2090%20600%20470'%3E%3Cpath%20fill='%2314181f'%20d='M150%20540L295%20110L440%20540L380%20540L295%20272L210%20540Z'/%3E%3Cpath%20fill='%2314181f'%20d='M440%20540L585%20110L730%20540L670%20540L585%20272L500%20540Z'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mt. Logos">
+<meta property="og:title" content="SUU Hiring Season Pipeline">
+<meta property="og:description" content="A free, offline recruiting toolkit for SUU accounting students — track every firm from first contact to offer, plan your CPA timeline, compare where to live.">
+<!-- Optional: once this is hosted, add its public URL and a preview image:
+<meta property="og:url" content="https://your-mt-logos-url/hiring-season-pipeline.html">
+<meta property="og:image" content="https://your-mt-logos-url/preview.png"> -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SUU Hiring Season Pipeline">
+<meta name="twitter:description" content="A free, offline recruiting toolkit for SUU accounting students.">
+<meta name="robots" content="index,follow">
+<style>
+  :root{
+    --bg:#f4f4f5; --panel:#ffffff; --ink:#1b1b1b; --ink-soft:#565656; --ink-faint:#8a8a8a;
+    --line:#e2e2e4; --line-strong:#c9c9cc;
+    --red:#BA0C2F; --red-dark:#8c0722; --red-tint:#fbeaee; --red-tint2:#f2ccd5;
+    --black:#141414;
+    --shadow:0 1px 2px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.05);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); min-height:100vh; font-size:14px; line-height:1.5;
+    -webkit-font-smoothing:antialiased; }
+  .container { width:100%; min-height:100vh; background:var(--bg); border-top:4px solid var(--red); }
+  .header { background:var(--panel); padding:18px 28px; display:flex; align-items:center; justify-content:space-between;
+    gap:16px; flex-wrap:wrap; border-bottom:1px solid var(--line); }
+  .header h1 { font-size:20px; font-weight:800; color:var(--black); letter-spacing:-.2px; }
+  .header h1 b { color:var(--red); }
+  .header p { color:var(--ink-soft); font-size:12.5px; margin-top:3px; }
+  .site-foot { max-width:960px; margin:8px auto 0; padding:20px 28px 34px; display:flex; flex-direction:column; gap:5px;
+    font-size:11.5px; line-height:1.6; color:var(--ink-faint); border-top:1px solid var(--line); }
+  .site-foot b { color:var(--ink-soft); }
+  .hdr-brand { display:flex; align-items:center; gap:13px; min-width:0; }
+  .brand-logo { height:34px; width:auto; flex:none; }
+  @media (max-width:760px){ .brand-logo { height:27px; } }
+  .hdr-tools { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+
+  .tabs { display:flex; gap:2px; overflow-x:auto; background:var(--panel); border-bottom:1px solid var(--line);
+    padding:0 16px; position:sticky; top:0; z-index:40; }
+  .tab { background:none; border:none; color:var(--ink-soft); font-family:inherit; font-size:12.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:.4px; padding:14px 14px; cursor:pointer; white-space:nowrap;
+    border-bottom:2px solid transparent; }
+  .tab:hover { color:var(--black); }
+  .tab.active { color:var(--red); border-bottom-color:var(--red); }
+  .panel { display:none; padding:24px 28px 44px; }
+  .panel.active { display:block; }
+
+  h2.sec { font-size:12px; text-transform:uppercase; letter-spacing:.7px; color:var(--red); margin:30px 0 12px;
+    padding-bottom:6px; border-bottom:1px solid var(--line); }
+  h2.sec:first-child { margin-top:0; }
+  h3.sub { font-size:12.5px; font-weight:800; color:var(--black); margin:22px 0 10px; }
+  .hint { font-size:12.5px; color:var(--ink-soft); margin-bottom:14px; line-height:1.65; }
+
+  a { color:var(--red); } a:hover { color:var(--red-dark); }
+
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(116px,1fr)); gap:10px; margin-bottom:16px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:13px; text-align:center;
+    box-shadow:var(--shadow); }
+  .card .n { font-size:21px; font-weight:800; color:var(--black); font-variant-numeric:tabular-nums; }
+  .card .l { font-size:9.5px; text-transform:uppercase; letter-spacing:.5px; color:var(--ink-soft); margin-top:4px; }
+  .card.bad .n { color:var(--red); }
+  .card.good .n { color:var(--red); }
+
+  .note { background:var(--red-tint); border-left:3px solid var(--red); border-radius:6px; padding:12px 14px;
+    font-size:12.5px; color:#5b2530; line-height:1.65; margin-bottom:16px; }
+  .warn { background:var(--panel); border:1px solid var(--red); border-left:4px solid var(--red); border-radius:6px;
+    padding:12px 15px; font-size:12.5px; color:var(--red-dark); line-height:1.65; margin-bottom:16px; }
+  .warn b { color:var(--red-dark); }
+  .editnote { font-size:11.5px; color:var(--ink-soft); margin-bottom:16px; line-height:1.6;
+    background:#f6f6f7; border-left:3px solid var(--line-strong); border-radius:5px; padding:9px 12px; }
+
+  .ed { outline:none; border-radius:4px; padding:2px 5px; margin:-2px -5px; min-height:19px; cursor:text; }
+  .ed:hover { background:var(--red-tint); }
+  .ed:focus { background:#fff; box-shadow:0 0 0 2px var(--red); }
+  .ed:empty:before { content:attr(data-ph); color:var(--ink-faint); }
+  .ed.long { white-space:pre-line; line-height:1.6; }
+
+  .inp { background:#fff; color:var(--ink); border:1px solid var(--line-strong); border-radius:6px;
+    padding:5px 7px; font-size:12px; font-family:inherit; }
+  .inp:focus { outline:none; border-color:var(--red); box-shadow:0 0 0 2px var(--red-tint); }
+  select.inp { cursor:pointer; }
+  .chk { width:16px; height:16px; accent-color:var(--red); cursor:pointer; flex-shrink:0; }
+
+  .pill { display:inline-block; font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:.4px;
+    padding:3px 8px; border-radius:20px; white-space:nowrap; }
+  .p-live { background:#ececed; color:#4a4a4a; }
+  .p-win  { background:var(--red); color:#fff; }
+  .p-closed { background:#f0f0f0; color:#9a9a9a; }
+
+  .filters { display:flex; gap:7px; flex-wrap:wrap; margin:4px 0 18px; align-items:center; }
+  .fbtn { background:#fff; border:1px solid var(--line-strong); color:var(--ink-soft); border-radius:20px;
+    padding:6px 13px; font-size:11.5px; font-weight:700; cursor:pointer; font-family:inherit; }
+  .fbtn:hover { border-color:var(--red); color:var(--red); }
+  .fbtn.on { background:var(--red); border-color:var(--red); color:#fff; }
+  .viewtog { display:inline-flex; border:1px solid var(--line-strong); border-radius:8px; overflow:hidden; margin-left:auto; }
+  .viewtog button { background:#fff; border:none; color:var(--ink-soft); font-family:inherit; font-size:11.5px;
+    font-weight:700; padding:6px 13px; cursor:pointer; }
+  .viewtog button + button { border-left:1px solid var(--line-strong); }
+  .viewtog button.on { background:var(--red); color:#fff; }
+
+  .cmp { overflow-x:auto; border:1px solid var(--red-tint2); border-radius:10px; background:var(--red-tint);
+    padding:2px 12px 6px; margin-bottom:18px; }
+  .cmp caption { text-align:left; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.5px;
+    color:var(--red-dark); padding:9px 2px 6px; }
+  .cmp th { color:var(--red-dark); border-bottom:2px solid var(--red-tint2); }
+  .cmp td { border-bottom:1px solid var(--red-tint2); }
+  .cmp tr:last-child td { border-bottom:none; }
+
+  .pgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(440px,1fr)); gap:16px; }
+  .pcard { background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--line-strong);
+    border-radius:12px; padding:15px 16px 13px; display:flex; flex-direction:column; gap:11px; box-shadow:var(--shadow); }
+  .pcard.state-live { border-left-color:#9a9a9a; }
+  .pcard.state-win { border-left-color:var(--red); }
+  .pcard.state-closed { border-left-color:#cfcfcf; opacity:.66; }
+  .pcard.conf { border-left-color:var(--red); box-shadow:0 0 0 1px var(--red); }
+  .pcard.hide { display:none; }
+
+  .pc-top { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .pc-firm { font-size:15.5px; font-weight:800; color:var(--black); flex:1; min-width:120px; }
+  .pc-tier { min-width:84px; }
+
+  .lock { font-size:10px; font-weight:800; letter-spacing:.3px; padding:4px 9px; border-radius:7px; }
+  .lock.on  { background:var(--red-tint); color:var(--red-dark); border:1px solid var(--red-tint2); }
+  .lock.off { background:#f3f3f4; color:#777; border:1px solid var(--line); }
+  .lock.bad { background:var(--red); color:#fff; border:1px solid var(--red-dark); }
+
+  .pc-row { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; }
+  .pc-row label { display:flex; flex-direction:column; gap:4px; font-size:9px; text-transform:uppercase;
+    letter-spacing:.5px; color:var(--ink-soft); font-weight:700; }
+  .pc-row label > .ed { background:#fff; border:1px solid var(--line-strong); border-radius:6px; min-width:150px;
+    padding:5px 7px; font-size:12px; text-transform:none; letter-spacing:0; color:var(--ink); font-weight:400; }
+  .offices-line { font-size:10.5px; color:var(--ink-soft); line-height:1.6; }
+  .offices-line .ed { color:var(--ink); }
+
+  .applybtn { background:var(--red); border:1px solid var(--red); color:#fff; border-radius:7px; padding:7px 13px;
+    font-size:11.5px; font-weight:800; text-decoration:none; white-space:nowrap; display:inline-block; }
+  .applybtn:hover { background:var(--red-dark); border-color:var(--red-dark); color:#fff; }
+  .applybtn.ghost { background:#fff; border-style:dashed; border-color:var(--line-strong); color:var(--ink-soft); }
+  .mini { background:#fff; border:1px solid var(--line-strong); color:var(--ink-soft); border-radius:6px;
+    min-width:24px; height:24px; font-size:11px; cursor:pointer; padding:0 6px; font-family:inherit; }
+  .mini:hover { border-color:var(--red); color:var(--red); }
+  .mini.del:hover { border-color:var(--red); color:var(--red); background:var(--red-tint); }
+
+  .pc-inside { background:#faf7f8; border:1px solid var(--line); border-radius:9px; padding:10px 12px; }
+  .pc-inside .tag { font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:.6px; color:var(--red);
+    background:var(--red-tint); border:1px solid var(--red-tint2); padding:2px 7px; border-radius:11px; }
+  .pc-inside .ed { margin-top:7px; font-size:12.5px; }
+  .pc-inside .ed.role { color:var(--ink-soft); font-size:11.5px; }
+
+  .bar { height:7px; border-radius:20px; background:#e9e9ea; overflow:hidden; margin-bottom:10px; }
+  .bar > i { display:block; height:100%; border-radius:20px; background:var(--red); transition:width .2s; }
+  .bar.closed > i { background:#bcbcbc; }
+  .steps { display:flex; flex-direction:column; gap:6px; }
+  .step-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .step { flex:1; min-width:210px; display:flex; align-items:center; gap:7px; background:#fff;
+    border:1px solid var(--line-strong); border-radius:8px; padding:6px 9px; font-size:11px; color:var(--ink-soft);
+    cursor:pointer; line-height:1.25; }
+  .step:hover { border-color:var(--red); }
+  .step.done { background:var(--red-tint); border-color:var(--red-tint2); color:var(--red-dark); }
+  .step b { font-weight:800; }
+  .step em { display:block; font-style:normal; font-size:9px; color:var(--ink-faint); letter-spacing:.2px; }
+  .step.done em { color:var(--red-dark); }
+  .stepdate { width:140px; }
+  .datewrap { display:inline-flex; align-items:center; gap:4px; }
+  .mini.today { min-width:22px; height:22px; font-size:9px; font-weight:800; padding:0; }
+  .mini.today:hover { background:var(--red); border-color:var(--red); color:#fff; }
+
+  .offer { background:var(--red-tint); border:1px solid var(--red-tint2); border-radius:9px; padding:11px 12px; }
+  .offer h4 { font-size:9.5px; text-transform:uppercase; letter-spacing:.6px; color:var(--red-dark); margin-bottom:9px; }
+  .offer .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(118px,1fr)); gap:9px; }
+  .offer label { display:flex; flex-direction:column; gap:3px; font-size:8.5px; text-transform:uppercase;
+    letter-spacing:.4px; color:var(--ink-soft); font-weight:700; }
+  .offer label > .ed, .offer label > .inp { background:#fff; border:1px solid var(--line-strong); border-radius:6px;
+    padding:5px 7px; font-size:12px; font-weight:400; text-transform:none; letter-spacing:0; color:var(--ink); min-width:0; }
+  .offer label.full { grid-column:1/-1; }
+
+  .funnel { display:flex; gap:8px; flex-wrap:wrap; margin:2px 0 10px; }
+  .stagemgr { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:0 0 16px; font-size:11.5px; color:var(--ink-soft); }
+  .sm-chip { display:inline-flex; align-items:center; gap:2px; background:var(--panel); border:1px solid var(--line-strong);
+    border-radius:20px; padding:3px 4px 3px 11px; }
+  .sm-chip .mini { padding:1px 5px; font-size:10px; line-height:1.4; }
+  .sm-chip .mini[disabled] { opacity:.3; cursor:default; }
+  .stagemgr .tb-btn { padding:4px 9px; font-size:11px; }
+  .fu { background:#fff; border:1px solid var(--line); border-radius:8px; padding:7px 11px; font-size:11px;
+    color:var(--ink-soft); box-shadow:var(--shadow); }
+  .fu b { color:var(--black); font-size:14px; font-weight:800; font-variant-numeric:tabular-nums; margin-right:5px; }
+
+  .addbtn { margin-top:14px; background:#fff; border:1px dashed var(--red); color:var(--red);
+    border-radius:8px; padding:9px 16px; font-size:12.5px; font-weight:800; cursor:pointer; font-family:inherit; }
+  .addbtn:hover { background:var(--red-tint); }
+
+  .tbl-wrap { overflow-x:auto; background:var(--panel); border-radius:10px; padding:4px 14px; border:1px solid var(--line);
+    box-shadow:var(--shadow); }
+  table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  th { text-align:left; color:var(--ink-soft); font-weight:700; padding:9px 8px; border-bottom:2px solid var(--line-strong);
+    text-transform:uppercase; font-size:10px; letter-spacing:.4px; white-space:nowrap; }
+  td { padding:8px; border-bottom:1px solid var(--line); vertical-align:top; line-height:1.5; }
+  tr:last-child td { border-bottom:none; }
+  tbody tr:hover { background:#faf6f7; }
+  table.ptbl td { vertical-align:middle; }
+  table.ptbl td.stg { text-align:center; }
+  table.ptbl td.stg .inp { width:74px; font-size:9px; padding:3px 4px; margin-top:3px; }
+  table.ptbl td.stg .mini.today { min-width:18px; height:18px; margin-top:3px; }
+  table.ptbl td.stg .datewrap { gap:3px; }
+  tr.prow.hide { display:none; }
+  tr.prow.state-closed { opacity:.6; }
+  tr.prow.conf td:first-child { box-shadow:inset 3px 0 0 var(--red); }
+  tr.prow.state-win td:first-child { box-shadow:inset 3px 0 0 var(--red); }
+  .linkrow { display:flex; align-items:center; gap:6px; margin-top:5px; flex-wrap:wrap; }
+  .linkrow a { font-size:10.5px; font-weight:700; }
+  .linkrow .nolink { font-size:10.5px; color:var(--ink-faint); }
+  .dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--red); margin-right:6px;
+    vertical-align:middle; }
+
+  .ecard { display:flex; gap:13px; align-items:flex-start; background:var(--panel); border:1px solid var(--line);
+    border-radius:10px; padding:14px 16px; margin-bottom:10px; box-shadow:var(--shadow); }
+  .ecard.done { background:var(--red-tint); border-color:var(--red-tint2); }
+  .ecard.done .ecard-t { text-decoration:line-through; color:var(--ink-soft); }
+  .ecard-num { color:var(--ink-faint); font-weight:800; font-size:12px; min-width:26px; padding-top:2px; flex-shrink:0; }
+  .ecard-chk { padding-top:2px; flex-shrink:0; }
+  .ecard-body { flex:1; min-width:0; }
+  .ecard-t { font-size:13.5px; font-weight:700; color:var(--black); line-height:1.5; }
+  .ecard-d { font-size:12.5px; color:var(--ink-soft); margin-top:8px; line-height:1.7; white-space:pre-line; }
+
+  .tips { margin:0 0 6px; padding-left:20px; }
+  .tips li { font-size:12.5px; color:var(--ink); line-height:1.7; margin-bottom:8px; }
+  .tips li b { color:var(--black); }
+  .tips li .d { color:var(--ink-soft); }
+  .tipblock { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:13px 15px;
+    margin-bottom:10px; box-shadow:var(--shadow); font-size:12.5px; line-height:1.7; }
+  .tipblock b { color:var(--black); }
+  .pre { white-space:pre-wrap; }
+  .grouprow td { background:#f3f3f4; font-weight:800; font-size:10px; text-transform:uppercase;
+    letter-spacing:.5px; color:var(--ink-soft); padding:7px 8px; }
+  tr.cpa-pass { background:var(--red-tint); }
+  tr.cpa-pass td:first-child { box-shadow:inset 3px 0 0 var(--red); }
+  tr.cpa-skip { opacity:.5; }
+  .cpast { font-family:inherit; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.4px;
+    border-radius:20px; padding:4px 11px; cursor:pointer; border:1px solid var(--line-strong); background:#fff;
+    color:var(--ink-soft); white-space:nowrap; }
+  .cpast:hover { border-color:var(--red); color:var(--red); }
+  .cpast.st-pass { background:var(--red); border-color:var(--red); color:#fff; }
+  .cpast.st-pass:hover { background:var(--red-dark); color:#fff; }
+  .cpast.st-skip { background:#f0f0f0; border-color:var(--line-strong); color:#9a9a9a; }
+  .promptbox { position:relative; background:#fbfbfb; border:1px solid var(--line-strong); border-radius:10px;
+    padding:14px 15px; margin-bottom:12px; }
+  .promptbox pre { white-space:pre-wrap; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11.5px; line-height:1.6; color:var(--ink); }
+  .promptbox .copy { position:absolute; top:10px; right:10px; }
+
+  .txtblock { width:100%; background:#fff; color:var(--ink); border:1px solid var(--line-strong); border-radius:8px;
+    padding:12px 14px; font-family:inherit; font-size:12.5px; line-height:1.7; resize:vertical; min-height:120px; }
+  .txtblock:focus { outline:none; border-color:var(--red); box-shadow:0 0 0 2px var(--red-tint); }
+
+  .savepill { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.5px;
+    padding:5px 10px; border-radius:20px; background:#f0f0f0; color:#666; border:1px solid var(--line-strong); }
+  .tb-btn { background:#fff; border:1px solid var(--line-strong); color:var(--ink); border-radius:7px;
+    padding:7px 11px; font-size:11.5px; font-weight:700; cursor:pointer; font-family:inherit; }
+  .tb-btn:hover { background:#f2f2f2; border-color:var(--red); color:var(--red); }
+
+  #toast { position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(24px);
+    background:var(--black); border:1px solid #333; border-radius:9px; box-shadow:0 12px 34px rgba(0,0,0,.28);
+    padding:11px 14px; display:flex; align-items:center; gap:14px; font-size:12.5px; color:#fff;
+    opacity:0; pointer-events:none; transition:opacity .18s, transform .18s; z-index:100; }
+  #toast.show { opacity:1; transform:translateX(-50%) translateY(0); pointer-events:auto; }
+  .toast-undo { background:#fff; border:1px solid #fff; color:var(--black); border-radius:6px;
+    padding:5px 11px; font-size:11.5px; font-weight:700; cursor:pointer; font-family:inherit; }
+
+  :focus-visible { outline:2px solid var(--red); outline-offset:2px; border-radius:3px; }
+  @media (prefers-reduced-motion: reduce) { * { transition-duration:.001ms !important; } }
+  @media (max-width:760px){ .panel{ padding:18px 14px 32px; } .pgrid{ grid-template-columns:1fr; } }
+
+  @media print {
+    body, .container, .header, .panel, .panel.active { background:#fff !important; }
+    .container { border-top:3px solid var(--red); }
+    .tabs, .hdr-tools, .filters, .addbtn, .mini, #toast, .editnote, .applybtn, .promptbox .copy { display:none !important; }
+    .panel { display:block !important; padding:0 0 20px; page-break-before:always; }
+    .panel:first-of-type { page-break-before:avoid; }
+    .pcard, .card, .ecard, .tbl-wrap, .note, .warn, .cmp, .tipblock, .promptbox { box-shadow:none !important; border:1px solid #bbb !important; }
+    a { color:#000; }
+    .ed:empty:before { content:''; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="hdr-brand">
+      <svg class="brand-logo" viewBox="140 -8 1250 685" role="img" aria-label="Mt. Logos" xmlns="http://www.w3.org/2000/svg">
+        <defs><clipPath id="mtlPeak"><path d="M150 540 L295 110 L440 540 L380 540 L295 272 L210 540 Z"/></clipPath></defs>
+        <g fill="#14181f"><path d="M150 540 L295 110 L440 540 L380 540 L295 272 L210 540 Z"/><path d="M440 540 L585 110 L730 540 L670 540 L585 272 L500 540 Z"/></g>
+        <g clip-path="url(#mtlPeak)"><path d="M240 218 L270 202 L290 214 L313 196 L350 175 L350 189 L314 210 L291 228 L271 216 L240 232 Z" fill="#ffffff"/></g>
+        <path d="M652 10 C656 34,661 39,685 43 C661 47,656 52,652 76 C648 52,643 47,619 43 C643 39,648 34,652 10 Z" fill="#14181f"/>
+        <text x="742" y="540" font-family="Palatino,'Palatino Linotype',Georgia,serif" font-size="190" letter-spacing="2" fill="#14181f">t.</text>
+        <text x="908" y="540" font-family="Palatino,'Palatino Linotype',Georgia,serif" font-size="190" letter-spacing="2" fill="#14181f" textLength="470" lengthAdjust="spacingAndGlyphs">Logos</text>
+        <text x="1155" y="640" font-family="Palatino,'Palatino Linotype',Georgia,serif" font-size="52" letter-spacing="24" fill="#8a919c" text-anchor="middle">λόγο&#962;</text>
+      </svg>
+      <div>
+        <h1><b>SUU</b> Hiring Season Pipeline</h1>
+        <p>Southern Utah University &bull; Accounting recruiting &bull; one office &amp; one service line per firm</p>
+      </div>
+    </div>
+    <div class="hdr-tools">
+      <span class="savepill" id="saveStatus" title="This copy lives only in this browser on this computer. Use Export backup to keep or move it.">Saved in this browser</span>
+      <button type="button" class="tb-btn" id="btnExport" title="Download the whole board as a .json backup">Export backup</button>
+      <button type="button" class="tb-btn" id="btnImport" title="Restore from a .json backup">Import</button>
+      <button type="button" class="tb-btn" id="btnPrint" title="Print or save as PDF">Print</button>
+      <button type="button" class="tb-btn" id="btnReset" title="Wipe everything and reload the starter board">Reset to starter</button>
+      <input type="file" id="fileImport" accept="application/json,.json" style="display:none">
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="panel active" id="p-pipeline"></div>
+  <div class="panel" id="p-paths"></div>
+  <div class="panel" id="p-cpa"></div>
+  <div class="panel" id="p-playbook"></div>
+
+  <footer class="site-foot">
+    <span>Built by <b>Mt.&nbsp;Logos</b></span>
+    <span>A free recruiting toolkit for SUU accounting students. Everything you enter stays in this browser.</span>
+    <span>Starter data is a template — verify firm offices, fees, dates and licensing requirements against primary sources. Not professional, tax, or legal advice.</span>
+  </footer>
+</div>
+<div id="toast"></div>
+
+<script>
+/* ============================================================================
+   SUU Hiring Season Pipeline  —  single-file, offline, self-contained.
+   Everything is stored in this browser's localStorage. No server, no network.
+   Export backup writes a .json you can keep or move to another machine.
+   ========================================================================== */
+
+function kvGet(k, d){ try { var r = localStorage.getItem(k); return r === null ? d : JSON.parse(r); } catch(e){ return d; } }
+function kvSet(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+function uid(){ return 'r' + Math.random().toString(36).slice(2, 9); }
+function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function host(u){ return String(u || '').replace(/^https?:\/\/(www\.)?/, '').split('/')[0]; }
+
+function getRows(key, defaults){
+  var v = kvGet(key, null);
+  if (Array.isArray(v)) return v;
+  var seeded = (defaults || []).map(function(d){ var o = {}; for (var k in d) o[k] = d[k]; o.id = uid(); return o; });
+  kvSet(key, seeded);
+  return seeded;
+}
+function setRows(key, rows){ kvSet(key, rows); }
+function getStr(key, def){ var v = kvGet(key, null); return (typeof v === 'string') ? v : def; }
+
+var toastTimer = null;
+function toast(msg, undoFn){
+  var t = document.getElementById('toast');
+  t.innerHTML = '<span>' + esc(msg) + '</span>' + (undoFn ? '<button class="toast-undo" id="tU">Undo</button>' : '');
+  t.classList.add('show');
+  if (undoFn) document.getElementById('tU').onclick = function(){ undoFn(); t.classList.remove('show'); };
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 9000);
+}
+
+var NBSP = new RegExp(String.fromCharCode(160), 'g');
+function readEd(el){
+  if (el.classList.contains('long'))
+    return String(el.innerText || '').replace(/\r\n/g, '\n').replace(NBSP, ' ').replace(/[ \t]+\n/g, '\n').replace(/\s+$/, '');
+  return String(el.textContent || '').replace(NBSP, ' ').replace(/\s+/g, ' ').trim();
+}
+function autolink(s){
+  return esc(s).replace(/(https?:\/\/[^\s]+)/g, function(u){
+    return '<a href="' + u + '" target="_blank" rel="noopener">↗ ' + esc(host(u)) + '</a>';
+  });
+}
+
+/* ============================================================================
+   Vocabulary
+   ========================================================================== */
+/* Generic location suggestions for the datalist when a firm has no office list.
+   Kept city-agnostic so a shared copy shows no particular strategy. */
+var CITY_LIST = [];
+var LINE_OPTS = [['', '— tax or audit'], ['Audit', 'Audit / Assurance'], ['Tax', 'Tax']];
+var TIER_OPTS = [['Big 4', 'Big 4'], ['Top 10', 'Top 10'], ['Top 25', 'Top 25'], ['Top 100', 'Top 100'],
+                 ['Regional', 'Regional'], ['Local', 'Local']];
+var SEASON_OPTS = [
+  ['', '— role / season'],
+  ['Winter internship', 'Winter internship'],
+  ['Spring internship', 'Spring internship'],
+  ['Summer internship', 'Summer internship'],
+  ['Fall internship', 'Fall internship'],
+  ['Summer leadership', 'Summer leadership / freshman'],
+  ['Full-time / new grad', 'Full-time / new grad'],
+  ['Experienced hire', 'Experienced hire']
+];
+var INDUSTRY_OPTS = [
+  ['', '— path'],
+  ['Public accounting', 'Public accounting'],
+  ['Corporate / industry', 'Corporate / industry'],
+  ['Government & nonprofit', 'Government & nonprofit'],
+  ['Banking & finance', 'Banking & finance'],
+  ['Advisory & consulting', 'Advisory & consulting'],
+  ['Forensic / fraud', 'Forensic / fraud'],
+  ['Tech-driven / analytics', 'Tech-driven / analytics'],
+  ['Entrepreneurial', 'Entrepreneurial / firm ownership']
+];
+var OUTCOME_OPTS = [
+  ['', '— in progress'],
+  ['offer_pending', 'Offer extended — acceptance pending'],
+  ['accepted', 'Accepted'],
+  ['declined', 'Declined this offer'],
+  ['rejected', 'Rejected / no offer extended'],
+  ['withdrew', 'Withdrew'],
+  ['ghosted', 'Ghosted / no response']
+];
+var WIN = { offer_pending:1, accepted:1 };
+var CLOSED = { declined:1, rejected:1, withdrew:1, ghosted:1 };
+var RATE5 = [['','–'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5']];
+var RATE10 = [['','–'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6'],['7','7'],['8','8'],['9','9'],['10','10']];
+
+/* the application-process columns, in order. [field, short label, sub-label, table header].
+   Every stage carries a <field>Date. Editable at runtime (add / reorder / remove) —
+   the live list is persisted to localStorage 'hs_stages'; this is just the default. */
+var STAGES_DEFAULT = [
+  ['applied',  'Applied',             'application submitted through the one office posting',      'Applied'],
+  ['round1',   '1st-round interview', 'first round with the team',                                '1st interview'],
+  ['round2',   '2nd-round interview', 'deeper round, often with a manager / partner',             '2nd interview'],
+  ['final',    'Final / office visit','Superday / office visit',                                  'Final / office']
+];
+function loadStages(){
+  var s = kvGet('hs_stages', null);
+  if (Array.isArray(s) && s.length){
+    return s.filter(function(x){ return x && x[0]; }).map(function(x){
+      return [String(x[0]), String(x[1] || x[0]), String(x[2] || ''), String(x[3] || x[1] || x[0])];
+    });
+  }
+  return STAGES_DEFAULT.map(function(x){ return x.slice(); });
+}
+var STAGES = loadStages();
+function persistStages(){ kvSet('hs_stages', STAGES); rerender(KEY_PIPE); }
+function stageKey(label){
+  var slug = String(label).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 24);
+  var base = 'cs_' + (slug || 'step'), k = base, i = 2, used = {};
+  STAGES.forEach(function(s){ used[s[0]] = 1; });
+  while (used[k]) k = base + '_' + (i++);
+  return k;
+}
+/* which columns represent an interview that actually happened (for the dashboard
+   "Interviewing" count) — inferred from the label so it works for custom columns. */
+function stageIsInterview(label){
+  var l = String(label).toLowerCase();
+  if (l.indexOf('info') > -1) return false;
+  return /interview|superday|office visit|on ?site|assessment cent|final round|onsite/.test(l);
+}
+var OFFER_FIELDS = [
+  ['offBase',    'Base salary'],
+  ['offBonus',   'Sign-on / relo bonus'],
+  ['offOt',      'OT / busy-season pay'],
+  ['offCpa',     'CPA bonus & support'],
+  ['offBen',     '401k / health / PTO'],
+  ['offStart',   'Start date'],
+  ['offHours',   'Busy-season hrs/wk'],
+  ['offCommute', 'Commute'],
+  ['offCol',     'Cost-of-living note']
+];
+
+function stageInfo(row){
+  var done = 0;
+  for (var i = 0; i < STAGES.length; i++) if (row[STAGES[i][0]]) done++;
+  var lastLabel = 'Prospecting';
+  for (var j = STAGES.length - 1; j >= 0; j--) { if (row[STAGES[j][0]]) { lastLabel = STAGES[j][1]; break; } }
+  var oc = row.outcome || '';
+  var state = WIN[oc] ? 'win' : (CLOSED[oc] ? 'closed' : 'live');
+  var pct = (oc === 'accepted') ? 100 : (STAGES.length ? Math.round(done / STAGES.length * 100) : 0);
+  var label = oc ? optLabel(OUTCOME_OPTS, oc) : lastLabel;
+  return { done:done, pct:pct, state:state, label:label };
+}
+function optLabel(opts, v){ for (var i = 0; i < opts.length; i++) if (opts[i][0] === v) return opts[i][1]; return v; }
+function normFirm(s){ return String(s || '').toLowerCase().replace(/[.,()]/g, '').replace(/\s+/g, ' ').replace(/\b(llp|pc|pllc|inc|usa|us)\b/g, '').trim(); }
+function hasOffer(row){ return !!WIN[row.outcome]; }
+
+function officeList(row){ return String(row.offices || '').split(/[;\n]/).map(function(s){ return s.trim(); }).filter(Boolean); }
+function officeSuggestions(row){ var o = officeList(row); return o.length ? o : CITY_LIST; }
+
+function conflicts(rows){
+  var by = {};
+  rows.forEach(function(r){ var k = normFirm(r.firm); if (!k) return; (by[k] = by[k] || []).push(r); });
+  var bad = {};
+  Object.keys(by).forEach(function(k){ if (by[k].length > 1) by[k].forEach(function(r){ bad[r.id] = by[k]; }); });
+  return bad;
+}
+
+/* ============================================================================
+   Seed data — pipeline & firms
+   ========================================================================== */
+var D = {};
+
+function P(firm, tier, city, line, season, url){
+  var o = { firm:firm, tier:tier, city:city, line:line, season:season || '',
+           industry:'Public accounting', offices:'', startWhen:'', url:url,
+           contact:'', contactRole:'', round2:false,
+           outcome:'', acceptBy:'', next:'', nextDate:'', notes:'',
+           offCulture:'', offScore:'', offNotes:'' };
+  STAGES.forEach(function(s){ o[s[0]] = false; o[s[0] + 'Date'] = ''; });
+  OFFER_FIELDS.forEach(function(f){ o[f[0]] = ''; });
+  return o;
+}
+/* Ships empty so a shared copy starts as a blank board — add your own firms. */
+D.pipeline = [];
+
+/* Optional: map a firm name to its offices so the location box offers them as a
+   forced pick. Empty by default; add "Firm Name": "City A; City B; City C". */
+var FIRM_OFFICES = {};
+
+/* ============================================================================
+   Seed data — Paths
+   ========================================================================== */
+/* Where-to-apply links, keyed by the career-path group they belong to. */
+D.pathLinks = {
+  'Public Accounting': [
+    ['AICPA — This Way to CPA', 'https://www.thiswaytocpa.com/'],
+    ['EY', 'https://careers.ey.com/'],
+    ['PwC', 'https://jobs.us.pwc.com/'],
+    ['Deloitte (students)', 'https://apply.deloitte.com/careers/students'],
+    ['KPMG (students)', 'https://www.kpmguscareers.com/students/']
+  ],
+  'Corporate / Private Accounting': [
+    ['IMA career center', 'https://careercenter.imanet.org/'],
+    ['LinkedIn Jobs', 'https://www.linkedin.com/jobs/'],
+    ['eFinancialCareers', 'https://www.efinancialcareers.com/'],
+    ['Indeed', 'https://www.indeed.com/']
+  ],
+  'Government & Nonprofit': [
+    ['USAJOBS (federal)', 'https://www.usajobs.gov/'],
+    ['Colorado state jobs', 'https://careers.colorado.gov/'],
+    ['Florida state jobs', 'https://jobs.myflorida.com/'],
+    ['Utah state jobs', 'https://statejobs.utah.gov/'],
+    ['GFOA career center', 'https://www.gfoa.org/career-center']
+  ],
+  'Financial / Banking / Economics Transition': [
+    ['eFinancialCareers', 'https://www.efinancialcareers.com/'],
+    ['Wells Fargo (students & grads)', 'https://www.wellsfargojobs.com/en/students-graduates/'],
+    ['JPMorgan (students)', 'https://careers.jpmorgan.com/us/en/students'],
+    ['Zions Bancorporation', 'https://www.zionsbancorporation.com/careers/']
+  ],
+  'Compliance & Risk': [
+    ['Protiviti', 'https://www.protiviti.com/us-en/careers'],
+    ['RSM consulting', 'https://jobs.rsmus.com/'],
+    ['PwC advisory', 'https://jobs.us.pwc.com/'],
+    ['EY advisory', 'https://careers.ey.com/']
+  ],
+  'Forensic Accounting / Fraud Investigation': [
+    ['ACFE career center', 'https://www.acfe.com/career'],
+    ['FTI Consulting', 'https://www.fticonsulting.com/careers'],
+    ['Kroll', 'https://www.kroll.com/en/careers'],
+    ['FBI jobs', 'https://fbijobs.gov/']
+  ],
+  'Emerging / Tech-Driven Roles': [
+    ['LinkedIn — "accounting data analyst"', 'https://www.linkedin.com/jobs/'],
+    ['EY tech & AI', 'https://careers.ey.com/'],
+    ['PwC tech & AI', 'https://jobs.us.pwc.com/']
+  ],
+  'Entrepreneurial / Consulting': [
+    ['AICPA practice management', 'https://www.aicpa-cima.com/topic/practice-management'],
+    ['Accounting Practice Sales', 'https://www.accountingpracticesales.com/'],
+    ['Paro (fractional finance)', 'https://www.paro.ai/'],
+    ['Upwork', 'https://www.upwork.com/']
+  ]
+};
+/* Every accounting career path — [group, role, pros, cons] — verbatim from the strategy doc. */
+D.careerPaths = [
+  ['Public Accounting', 'Audit Associate / Staff Accountant', 'Builds analytical & client skills', 'Long hours in busy season'],
+  ['Public Accounting', 'Tax Associate / Tax Preparer', 'High earning potential with specialization', 'Seasonal crunch, complex regulations'],
+  ['Public Accounting', 'Advisory / Consulting Analyst', 'Strategic, client-facing', 'Less traditional accounting focus'],
+  ['Public Accounting', 'External Compliance Auditor', 'Strong demand, regulatory exposure', 'Can be routine'],
+  ['Forensic Accounting / Fraud Investigation', 'Forensic Accountant / Fraud Investigator', 'Engaging investigations, litigation, fraud; strong demand in legal cases & corporate compliance', 'Can involve confrontational/sensitive situations; work less predictable & reactive'],
+  ['Corporate / Private Accounting', 'Financial Analyst', 'Exposure to forecasting & planning', 'Can be high-pressure deadlines'],
+  ['Corporate / Private Accounting', 'Corporate Accountant', 'Manage daily accounting & reporting', 'Routine at times'],
+  ['Corporate / Private Accounting', 'Management Accountant / Cost Accountant', 'Operational efficiency insights', 'Can be repetitive'],
+  ['Corporate / Private Accounting', 'Internal Auditor', 'Improve internal controls', 'Sometimes policing employees'],
+  ['Corporate / Private Accounting', 'Budget Analyst / Planner', 'Control budgets & forecasts', 'Can be constrained by politics'],
+  ['Corporate / Private Accounting', 'Payroll Accountant', 'Specialization in payroll', 'Repetitive, seasonal spikes'],
+  ['Corporate / Private Accounting', 'Accounts Payable / Receivable Accountant', 'Day-to-day finance operations', 'Less strategic work'],
+  ['Corporate / Private Accounting', 'Controller (entry-level)', 'Fast track to leadership', 'Heavy responsibility early'],
+  ['Government & Nonprofit', 'Government Accountant / Auditor', 'Stable, public service impact', 'Bureaucratic constraints'],
+  ['Government & Nonprofit', 'Nonprofit Accountant', 'Mission-driven work', 'Lower pay than corporate'],
+  ['Government & Nonprofit', 'Tax Examiner / Revenue Agent', 'Clear career path, regulatory expertise', 'Confrontational situations possible'],
+  ['Government & Nonprofit', 'Grants Accountant', 'Specialized compliance', 'Limited roles'],
+  ['Government & Nonprofit', 'State / Local Finance Analyst', 'Policy & budgeting', 'Bureaucracy, slower advancement'],
+  ['Financial / Banking / Economics Transition', 'Credit Analyst', 'Assess financial risk', 'Can be repetitive'],
+  ['Financial / Banking / Economics Transition', 'Treasury Analyst / Cash Manager', 'Manage liquidity & cash flow', 'High responsibility'],
+  ['Financial / Banking / Economics Transition', 'Financial Planner / Advisor', 'Client advisory, varied work', 'Requires licenses/certifications'],
+  ['Financial / Banking / Economics Transition', 'Investment Banking Analyst', 'High pay, fast-paced', 'Extremely long hours'],
+  ['Financial / Banking / Economics Transition', 'Risk Analyst', 'Strategic, wide impact', 'Pressure to prevent loss'],
+  ['Financial / Banking / Economics Transition', 'Portfolio Analyst', 'Investment focus', 'Market volatility stress'],
+  ['Financial / Banking / Economics Transition', 'Wealth Management Associate', 'Client-facing, growth potential', 'High performance expectations'],
+  ['Financial / Banking / Economics Transition', 'Equity Research Analyst', 'Deep financial analysis', 'Market pressure'],
+  ['Financial / Banking / Economics Transition', 'Corporate Finance Analyst', 'Strategic planning', 'Can be repetitive'],
+  ['Financial / Banking / Economics Transition', 'Economic Analyst / Policy Analyst', 'Data-driven & policy exposure', 'Less accounting work'],
+  ['Financial / Banking / Economics Transition', 'Banking Relationship Manager', 'Client relationship development', 'Sales pressure'],
+  ['Specialized / Niche Industry', 'Environmental / Sustainability Accountant', 'Growing field, socially impactful', 'Niche market, fewer jobs'],
+  ['Specialized / Niche Industry', 'ERP / Accounting Systems Analyst', 'Tech integration in finance', 'Continuous learning required'],
+  ['Specialized / Niche Industry', 'Healthcare Accountant', 'Specialized industry knowledge', 'Complex regulations'],
+  ['Specialized / Niche Industry', 'Oil, Gas, or Energy Accountant', 'Lucrative, specialized', 'Highly regulated'],
+  ['Specialized / Niche Industry', 'Real Estate / Property Accountant', 'Industry focus, varied work', 'Niche, can be cyclical'],
+  ['Specialized / Niche Industry', 'Government Contract Accountant', 'High compliance demand', 'Bureaucratic & complex'],
+  ['Specialized / Niche Industry', 'Entertainment / Media Accountant', 'Creative industry exposure', 'Irregular hours'],
+  ['Specialized / Niche Industry', 'Nonprofit Fund Accountant', 'Mission-driven, grant work', 'Limited career path'],
+  ['Specialized / Niche Industry', 'International / Global Accountant', 'Global exposure', 'Requires adaptability & language/culture knowledge'],
+  ['Compliance & Risk', 'Internal Auditor', 'Risk control & governance', 'Strain on internal relationships'],
+  ['Compliance & Risk', 'Compliance Officer', 'Regulatory enforcement', 'Can be stressful'],
+  ['Compliance & Risk', 'SOX Analyst', 'Sarbanes-Oxley compliance', 'Repetitive audits'],
+  ['Compliance & Risk', 'Regulatory Reporting Analyst', 'Ensures legal & financial compliance', 'Detailed, strict deadlines'],
+  ['Compliance & Risk', 'Risk & Controls Consultant', 'Advisory, problem-solving', 'Heavy client expectations'],
+  ['Entrepreneurial / Consulting', 'Small Business Owner / CPA Firm Owner', 'Autonomy & earning potential', 'Full responsibility, risk'],
+  ['Entrepreneurial / Consulting', 'Business Consultant / Strategy Advisor', 'High variety, impactful', 'Client-dependent workload'],
+  ['Entrepreneurial / Consulting', 'Freelance Bookkeeper / Tax Consultant', 'Flexible schedule', 'Income inconsistency'],
+  ['Entrepreneurial / Consulting', 'Startup Financial Advisor', 'High-impact advisory', 'Uncertain business outcomes'],
+  ['Entrepreneurial / Consulting', 'Entrepreneur / Founder', 'Unlimited potential, creativity', 'Risk of failure, heavy workload'],
+  ['Entrepreneurial / Consulting', 'CFO for startup / small business', 'Leadership & strategy', 'High pressure & accountability'],
+  ['Emerging / Tech-Driven Roles', 'Data Analyst / Visualization Specialist', 'Analytics & tech-driven insights', 'Less traditional accounting'],
+  ['Emerging / Tech-Driven Roles', 'Fintech / Accounting Software Specialist', 'Growth field, tech integration', 'Continuous learning'],
+  ['Emerging / Tech-Driven Roles', 'Blockchain / Crypto Accountant', 'Cutting-edge field', 'Regulatory uncertainty'],
+  ['Emerging / Tech-Driven Roles', 'Analytics & AI Accounting Specialist', 'Automate audits & reporting', 'Tech-focused, less client work'],
+  ['Emerging / Tech-Driven Roles', 'Robotic Process Automation (RPA) Accountant', 'Efficiency & innovation', 'Tech-heavy, less traditional accounting'],
+  ['Emerging / Tech-Driven Roles', 'Cloud Accounting Specialist', 'Modernized financial management', 'Requires tech adaptability']
+];
+/* Firm size reference — [firm, tier, ~employees, ~CPAs, location] */
+D.utahFirms = [
+  ['Deloitte', 'Big 4', '8,000+ (Utah office)', 'Hundreds — SLC office', 'Salt Lake City'],
+  ['EY', 'Big 4', '1,000+ (Utah office)', 'Hundreds — SLC office', 'Salt Lake City'],
+  ['KPMG', 'Big 4', '500+ (Utah office)', 'Hundreds — SLC office', 'Salt Lake City'],
+  ['PwC', 'Big 4', '500+ (Utah office)', 'Hundreds — SLC office', 'Salt Lake City'],
+  ['Eide Bailly', 'Large Regional', '3,000+ firmwide', '600+ firmwide', 'Salt Lake City (HQ Fargo)'],
+  ['Tanner LLC', 'Medium', '200–300', '60–80', 'Salt Lake City'],
+  ['Haynie & Company', 'Medium', '200–300', '50–80', 'Salt Lake City'],
+  ['WSRP', 'Medium', '80–100', '13 partners, dozens of staff CPAs', 'Salt Lake City'],
+  ['Squire · HintonBurdick', 'Small–Medium', '100–150', '30–50', 'St. George / Cedar City'],
+  ['Larson & Company', 'Small–Medium', '100–150', '30–50', 'Provo / Salt Lake City']
+];
+D.sizeMetrics = [
+  ['Total employee headcount', 'Staff, managers, partners and support staff combined, firmwide.'],
+  ['Number of licensed CPAs', 'A narrower, more meaningful cut — not every employee is a CPA, especially at large firms with many support and admin roles.'],
+  ['Partner count', 'Signals how top-heavy or flat the firm is; more partners per staff often means more access to leadership.'],
+  ['Revenue', 'Industry rankings (e.g. INSIDE Public Accounting’s Top 500) sort primarily by annual revenue; dollar size tracks closely with headcount.'],
+  ['Office count & geographic reach', 'Single-office local firm vs. multi-state or national.']
+];
+D.sizeBrackets = [
+  ['Big 4', 'Global firms — tens of thousands of employees worldwide, thousands of CPAs per firm.'],
+  ['National / Large Regional', '~500 to 5,000+ employees, 100+ CPAs, multiple state offices. (Eide Bailly fits here.)'],
+  ['Regional / Mid-size', '~50 to 500 employees, 20 to 150 CPAs, usually one state or a few offices. (Tanner, Haynie, WSRP.)'],
+  ['Local / Small', 'Under ~50 to 100 employees, under 30 CPAs, one or two offices, built around a handful of partners. (HintonBurdick, Larson, most Southern Utah shops.)']
+];
+D.tierTradeoffs = [
+  ['Big 4', 'Strongest brand and structured CPA support — but 60–70+ hr weeks and high turnover.'],
+  ['Large Regional (Eide Bailly)', 'Good client exposure, less burnout — but lower pay and fewer offices.'],
+  ['Mid-size (Tanner, Haynie, WSRP)', 'Strong client exposure, better hours — but smaller name recognition and lower pay than Big 4.'],
+  ['Small / Local (HintonBurdick, Larson)', 'Most client interaction and the best lifestyle — but the weakest brand and least CPA-exam support.']
+];
+/* A ranking exercise: 10 professors each ordered 10 firm-selection traits 1–10
+   (each number used once → every column sums to 55). [trait, [scores…], avg, median] */
+D.profRankProfs = ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'P10'];
+D.profRankRows = [
+  ['Salary', [10, 3, 5, 3, 8, 5, 2, 3, 6, 5], '5.0', '5'],
+  ['Life balance / PTO', [9, 4, 8, 6, 10, 7, 6, 1, 2, 2], '5.5', '6'],
+  ['Office (aesthetic)', [8, 10, 10, 9, 5, 10, 10, 8, 9, 10], '8.9', '9'],
+  ['Location', [5, 9, 6, 8, 3, 3, 3, 5, 5, 3], '5.0', '5'],
+  ['Prestige', [7, 7, 2, 10, 2, 1, 4, 10, 10, 9], '6.2', '7'],
+  ['Training program', [2, 6, 4, 7, 7, 4, 8, 7, 3, 4], '5.2', '6'],
+  ['Promotional potential', [4, 2, 7, 2, 6, 9, 1, 6, 7, 8], '5.2', '6'],
+  ['Office culture', [1, 1, 3, 1, 4, 6, 5, 2, 1, 1], '2.5', '2'],
+  ['Benefits (CPA assistance, health, dental, 401k)', [6, 8, 9, 4, 9, 8, 9, 4, 8, 6], '7.1', '8'],
+  ['Client / industry focus', [3, 5, 1, 5, 1, 2, 7, 9, 4, 7], '4.4', '4']
+];
+/* International office work — Audit vs. Tax mobility */
+D.intlMobility = [
+  ['Audit — easy to move', 'Financial-accounting rules (IFRS / US GAAP) are largely the same everywhere, so the skill transfers straight across borders.'],
+  ['Tax — harder to move', 'Tax law is country-specific. Only niche groups — Transfer Pricing, International Tax — move easily.']
+];
+D.intlTimeline = [
+  ['Years 1–2 (Staff)', 'Almost none. Focus on local clients and the CPA.', 'Almost none. Focus on local law and the CPA.'],
+  ['Years 2–3 (Senior)', 'High. Common 3–6 month busy-season swaps (e.g. US to UK / Australia).', 'Low–Moderate. Mostly 1–2 year transfers in Transfer Pricing or Expat Tax.'],
+  ['Years 5+ (Manager)', 'Very high. Permanent or 2+ year moves to manage foreign audit teams.', 'High (specialized). 2+ year moves for cross-border transactions and M&A tax.']
+];
+
+/* ============================================================================
+   Seed data — Playbook (static reference only; the per-firm sequence is the
+   Pipeline tab's stage chips)
+   ========================================================================== */
+/* --- verbatim from Accounting Track STRAT --- */
+function TP(title, detail, url){ return { title:title, detail:detail || '', url:url || '' }; }
+D.recruitTips = [
+  TP('Join PAC', 'Get involved early', 'https://forms.gle/7YMMj62Cz7rak4ULA'),
+  TP('Join UACPA (student membership)', 'Show commitment to the profession', 'https://www.uacpa.org/'),
+  TP('Create LinkedIn (500+ connections goal)', 'Build visibility and credibility. Pick a professional you admire and copy their LinkedIn setup with your own credentials.', 'https://www.linkedin.com/'),
+  TP('Create Handshake account', 'Access internships and recruiting opportunities', 'https://suu.joinhandshake.com/'),
+  TP('Attend Accounting Bootcamp', 'Learn recruiting expectations and industry basics'),
+  TP('Attend PAC events regularly', 'Meet professionals and stay visible'),
+  TP('Learn accounting/recruiting jargon', 'Speak confidently in interviews and networking'),
+  TP('Earn certificates and name your skills', 'Short certs in Excel, Power BI, Alteryx, SQL, Tableau, QuickBooks — LinkedIn Learning or Coursera. Put them on your résumé and LinkedIn: a Power BI cert sets your skillset apart and signals you’re eager to learn, which is exactly what firms screen for at the entry level.'),
+  TP('Connect with professionals on LinkedIn', 'Expand network intentionally'),
+  TP('Request 10-minute informational interviews', 'Build real relationships'),
+  TP('Ask them to review your resume', 'Improve application quality'),
+  TP('Send thank-you message', 'Maintain professionalism'),
+  TP('Be genuine', 'Forced networking is obvious'),
+  TP('Request LinkedIn recommendations', 'Ask mentors, peers, coworkers and managers to write one — their words on your profile carry more weight with recruiters than your own.'),
+  TP('Apply', 'Turn networking into opportunity'),
+  TP('Start investing early — dollar-cost average into broad ETFs', 'Long-term wealth building. Bonus: watching real positions gives you a working understanding of stocks, earnings and markets, broadens your business / accounting vocabulary and familiarity with how companies actually operate, and makes Financial Accounting I and II click much faster. Automate a small amount weekly into a low-cost index ETF (examples: VOO, SPMO, SCHD) through any established broker.'),
+  TP('Stop worrying about what firms you "like"', 'Get two offers, then you can care about choosing between cultures and fit'),
+  TP('For Big 4, plan to recruit out of state', 'SUU places well regionally, but Big 4 offices pull most heavily from a few large in-state and national programs. Widen your target list to Denver, Dallas, Phoenix, Salt Lake and beyond, and start building those relationships a year early.'),
+  TP('Get involved with service — related or not', 'Student-org leadership, PAC council, a club officer role, a department or community volunteer effort. It builds references and shows follow-through.'),
+  TP('Ask for a personal office tour or attend a firm event', 'Go the extra mile to show your interest'),
+  TP('Google Calendar', 'Build a budget of your time. Aim for 4 hrs of strict studying and 4 hrs of work (the more relevant the better) daily as a baseline.'),
+  TP('Turn off all notifications on phone and laptop', 'Focus is about subtraction, not addition.'),
+  TP('Always be gracious', 'If you get an offer and do not accept, be very kind and respectful. Thank them for their time. Keep the door open. You might need a job from them later.')
+];
+D.courseTips = [
+  'Degree Works: Take ACCT 2010 first semester if possible. Knock out hard generals.',
+  'Spread apart your easy generals across your semesters to balance harder courses — unless you plan to switch universities, then get your associates ASAP.',
+  'Peer crowd-source on when to take what classes and from what professors.',
+  'Take your accounting classes before your finance classes so you can name-drop aced classes in interviews. Allows you to interview earlier.',
+  'Take as few total classes as possible. Don’t waste time with irrelevant classes.',
+  'Pick one major. Employers don’t care about minors. Double majors still only get you one degree. If you want more education, opt for the dual Masters.'
+];
+D.landingTips = [
+  TP('Get the closest-to-accounting job you can, as early as you can',
+     'Bookkeeping, AR/AP, payroll, an internal-audit clerkship, a bank teller line, a front-desk role at a local CPA firm — any real exposure counts. It proves you actually like the work, gives you résumé lines and references, and makes you a known quantity before internship recruiting starts. No accounting role open? Take an adjacent one, not an unrelated one — bank / credit union, construction or office admin, finance assistant, operations. Résumé building plus professional exposure beats a job with nothing transferable.'),
+  TP('Ask for help finding it', 'Career Center, PAC open office hours, people you met at events, upperclassmen. You don’t know what you don’t know.')
+];
+D.preTips = [
+  TP('Set up classes for all semesters', 'Know your exact graduation date. Employers care about timing.'),
+  TP('Download current Degree Works', 'Employers often require a transcript and this suffices (print the Degree Works worksheet to PDF).'),
+  TP('Maintain a general cover letter template', 'Customize quickly with AI for each application. Include a name-drop from your network of someone who works there.'),
+  TP('Create a solid resume', 'Use the Career Center. Get a third-party professional review.', 'https://www.suu.edu/careercenter/')
+];
+D.generalTips = [
+  TP('Apply broadly', 'Apply to ALL firms. Set aside an hour a week to do applications. Some take longer than others.'),
+  TP('Secure an insider referral', 'Build a relationship with an advocate before applying. Ask them to let the resume reviewers know you just applied — it puts a gold star on your resume.'),
+  TP('Follow up professionally', 'Thank-you + continued contact.'),
+  TP('GPA target: 3.5 or higher', 'Opens the most doors.'),
+  TP('Reputation', 'Be personable, consistent, honest — represent SUU Accounting well.'),
+  TP('DO NOT sign an offer and retract it', 'To maintain a good reputation for SUU Accounting, and your own brand, do not break a contract or double sign.')
+];
+/* --- link registry pulled from the strategy doc --- */
+/* A standard SUU accounting -> CPA timeline, with each link dropped at the point
+   it actually matters. [phase, when, [ {title, detail, url} ... ]] */
+D.stdTimeline = [
+  ['Freshman / Sophomore / Junior', '0–90 credits', [
+    TP('Join PAC', 'Get involved early — this is where the employer connections start.', 'https://forms.gle/7YMMj62Cz7rak4ULA'),
+    TP('UACPA student membership', 'Show commitment to the profession.', 'https://www.uacpa.org/'),
+    TP('Build LinkedIn (aim 500+ connections)', 'Copy a professional you admire; keep it current; ask for recommendations.', 'https://www.linkedin.com/'),
+    TP('Create your Handshake account', 'SUU recruiting portal — internships and employer events.', 'https://suu.joinhandshake.com/'),
+    TP('Degree Works: take ACCT 2010 early', 'Protect that grade; knock out hard generals; accounting before finance classes.'),
+    TP('Get the closest-to-accounting job you can', 'Bookkeeping, AR/AP, payroll, internal-audit clerk, bank line, front desk at a local CPA firm — any real exposure. General business if nothing accounting is open. (See the "Landing your first accounting-related role" principle above.)'),
+    TP('Start investing early', 'Dollar-cost average a small amount weekly into a broad low-cost ETF (examples: VOO, SPMO, SCHD) through any established broker. It also makes your finance classes click.'),
+    TP('Apply to GradPath', 'Opens junior year — locks in the master’s (150-hour) path.', 'https://apply.suu.edu/register/grad_path'),
+    TP('Meet the Firms + office visits', 'Fall. Get a man on the inside at your one target office per firm.'),
+    TP('Internship applications', 'Fall, ~12–18 months before the internship. One office, one line (Tax/Audit) per firm.'),
+    TP('Resume review', 'Career Center plus a third-party professional review.', 'https://www.suu.edu/careercenter/')
+  ]],
+  ['Senior year', '90+ credits', [
+    TP('Spring busy-season internship', 'Carry 0 classes that term. Claim internship credit.', 'https://www.suu.edu/careercenter/internship/students.html#credit'),
+    TP('Convert the internship to a full-time offer', 'The whole point of the internship.'),
+    TP('Apply for grad scholarship / tuition waivers', 'Before the master’s year.', 'https://www.suu.edu/graduatestudies/funds/scholarship-waiver.html'),
+    TP('Bachelor’s completes', '120 credits.')
+  ]],
+  ['Master’s year', '120 → 150 credits', [
+    TP('MAcc coursework', 'Tax / Professional Accounting / Analytics track.'),
+    TP('Enroll for the CPA exam', 'Utah is the jurisdiction; you apply through NASBA.', 'https://nasba.org/exams/cpaexam/utah/'),
+    TP('Start studying — FAR first', 'Then AUD, REG, then your discipline (TCP). The 30-month clock starts at your first pass.')
+  ]],
+  ['Licensure', 'after 150 credits + experience', [
+    TP('Pass all 4 sections in the 30-month window', '3 core (FAR / AUD / REG) + 1 discipline (TCP).'),
+    TP('Experience: 1 year (master’s path) or 2 years (bachelor’s path)', 'Public or private accounting both count.'),
+    TP('Submit the experience-verification form', 'Signed, uploaded with your Utah CPA application.', 'https://commerce.utah.gov/wp-content/uploads/2022/12/verification-of-experience-for-licensure-as-a-CPA.pdf'),
+    TP('Apply through Utah DOPL', 'Division of Professional Licensing.', 'https://commerce.utah.gov/'),
+    TP('Backstop: SUU on-campus jobs / Internal Audit', 'If you need income or experience hours.', 'https://www.suu.edu/hr/employment.html')
+  ]]
+];
+D.summerWhy ='If you need to work in the summer to survive, do it. But many students have scholarships and/or help from family. If you continue with classes in the summer, there are several benefits:\n\n• You get used to continuous work, similar to the pace of a full-time career.\n• Greater negotiating power with local employers — they will often choose a consistent part-timer over someone who plans to leave for breaks or move home for the summer.\n• You get to graduation sooner — which means earning a salary sooner.\n• Rent is often cheaper in the summer.\n• Opens opportunities to balance classes and better strategize when to take certain classes and which classes to take together.\n• Fewer distractions during the summer term.\n• Academic momentum — why take ACCT 2010, wait a summer and forget the accounting principles, then take 2020 in the fall and have to relearn things?';
+D.cityPrompt = [
+  'Act as a relocation strategist and career advisor. Generate a custom "City Search – Final Comparison" table and strategic plan based on the inputs provided below.',
+  '',
+  '==================================================',
+  'STEP 1: LOCATION & HARD FILTERS (Non-Negotiables)',
+  '==================================================',
+  '1. Religious / Community Requirement:',
+  '   - Target Facility: {your faith community / temple / worship center, or "none"}',
+  '   - Maximum Distance: {max minutes}',
+  '',
+  '2. Professional & Commute Criteria:',
+  '   - Target Industry & Firm Size: {your target industry & employer size}',
+  '   - Maximum Commute: {max minutes}',
+  '   - Geographic Exclusions: {states or regions to rule out, or "none"}',
+  '',
+  '3. Outdoor & Recreation:',
+  '   - Target Activities: {your top 3–5 outdoor activities}',
+  '   - Maximum Distance to Outdoors: {max minutes}',
+  '',
+  '4. Climate & Environment:',
+  '   - Weather Preference: {your weather preferences}',
+  '   - City Vibe: {the traffic / transit / neighborhood feel you want}',
+  '',
+  '5. Housing Target:',
+  '   - Target Property: {your target housing type}',
+  '',
+  '==================================================',
+  'STEP 2: PRIORITY ALLOCATION (Must sum to 100%)',
+  '==================================================',
+  'These are blank on purpose — YOU decide the weights. Put a number in every {} so the ten weights total 100:',
+  '',
+  '[CAREER CORE]',
+  '- Target Employer Strength / Mobility: {__}',
+  '- Entry Starting Salary: {__}',
+  '- Commute Efficiency / Transit: {__}',
+  '',
+  '[LIFE INFRASTRUCTURE]',
+  '- Housing Cost / Rent Value: {__}',
+  '- State Income Tax Rate: {__}',
+  '- Distance / Flight to Hometown ({your hometown}): {__}',
+  '',
+  '[LIFESTYLE]',
+  '- Outdoor & Recreation Access: {__}',
+  '- Climate / Weather Comfort: {__}',
+  '',
+  '[VALUES & FUTURE ALIGNMENT]',
+  '- Religious / Community Proximity: {__}',
+  '- Long-Term Family & Cultural Fit: {__}',
+  '',
+  'Total must equal 100.',
+  '',
+  '==================================================',
+  'STEP 3: CAREER STRATEGY & MILESTONES',
+  '==================================================',
+  '- Target Entry City / Firm: {your entry target — role, city, how many years}',
+  '- Mid-Career Target: {your mid-career target}',
+  '- Long-Term Goal City: {your long-term goal city}',
+  '- Long-Term Objective: {your long-term objective}',
+  '- Backup Option: {your backup city / firm, or "none"}',
+  '',
+  '==================================================',
+  'OUTPUT INSTRUCTIONS',
+  '==================================================',
+  'Based on the inputs above, produce:',
+  '',
+  '1. Weighted Comparison Table:',
+  '   - Include columns for: Weighted Score (out of 10), City Name, and each individual weighted criterion from Step 2.',
+  '   - Analyze 5–6 top candidate cities matching the criteria, plus the designated backup option.',
+  '   - Include exact metrics in table cells (e.g., firm presence, commute times, estimated 2B2B rent, salary ranges, state tax rates).',
+  '',
+  '2. Long-Term Career Roadmap:',
+  '   - Synthesize a step-by-step career path explaining how moving between these target cities builds leverage toward the final long-term goal.',
+  '',
+  '3. Core Tradeoff & Priority Breakdown:',
+  '   - Summarize the top choices by grouping the criteria into core pillars (Career Core, Life Infrastructure, Lifestyle, Values Alignment).',
+  '   - Detail the primary tradeoffs of the top-ranked cities.',
+  '',
+  '4. Honorable Mentions:',
+  '   - List 10–15 additional cities with estimated scores out of 10.'
+].join('\n');
+
+D.planPrompt = [
+  'Act as an academic and CPA-licensing advisor. Build me a semester-by-semester roadmap from where I am now through CPA licensure — a term-by-term table plus notes.',
+  '',
+  '==================================================',
+  'WHERE I AM NOW',
+  '==================================================',
+  '- School / program: {your school & degree program}',
+  '- Current term: {your current term, e.g. Fall 2026}',
+  '- Credits earned so far: {credits}   |   Current GPA: {GPA}   |   GPA goal: {GPA goal}',
+  '- I will take summer classes: {yes / no / some}',
+  '',
+  '==================================================',
+  'DEGREE TARGETS',
+  '==================================================',
+  '- Bachelor’s: {credit total — usually 120}',
+  '- Master’s (for the CPA 150-hour rule): {total credits for CPA — usually 150} — program: {your master’s program / track}',
+  '- Standard load: {credits} fall & spring, {credits} summer',
+  '- Course sequencing rules: take accounting classes before finance classes; Financial Accounting I is the hardest course — never pair it with Financial II or Auditing.',
+  '',
+  '==================================================',
+  'INTERNSHIP & RECRUITING',
+  '==================================================',
+  '- Target internship: {internship season}, {target term} — carry 0 classes that term.',
+  '- Recruiting happens ~12–18 months before the internship: Meet the Firms, applications, office visits (usually the Fall).',
+  '- Apply to the master’s program: {when — e.g. start of junior year}.',
+  '- Scholarship / tuition-waiver applications: {when}.',
+  '',
+  '==================================================',
+  'CPA EXAM PLAN',
+  '==================================================',
+  '- 4 sections: 3 core (FAR, AUD, REG) + 1 discipline: {your discipline — TCP, ISC or BAR}.',
+  '- The 30-month window starts when I pass my FIRST section — time the first pass so the window does not force retakes.',
+  '- Target: {your CPA study timeline}.',
+  '- Order preference: {your section order}.',
+  '',
+  '==================================================',
+  'OUTPUT INSTRUCTIONS',
+  '==================================================',
+  '1. Term-by-term table — columns: Term | Credits that term | Running total | Milestone / plan | Work / internship | CPA study or exam.',
+  '   - One row per term (Fall, Spring, Summer) from my current term through the term I finish the CPA.',
+  '   - Mark the terms where the bachelor’s finishes, the master’s finishes, GradPath is due, the internship happens, and each CPA section is studied and sat.',
+  '2. A "watch-outs" list: course-sequencing traps, the busy-season term to keep class-free, and how the 30-month CPA clock lines up with my timeline.',
+  '3. A one-line summary: my graduation date, my CPA-eligible date, and my fully-licensed date.'
+].join('\n');
+
+/* ============================================================================
+   Shared control builders
+   ========================================================================== */
+function edCell(key, row, f, ph, long){
+  return '<div class="ed' + (long ? ' long' : '') + '" contenteditable="true" role="textbox" tabindex="0"'
+    + ' data-k="' + key + '" data-id="' + row.id + '" data-f="' + f + '" data-ph="' + esc(ph || '—') + '">'
+    + esc(row[f] == null ? '' : row[f]) + '</div>';
+}
+function selCell(key, row, f, opts){
+  var v = row[f] == null ? '' : row[f];
+  var list = opts.slice();
+  if (v !== '' && !list.some(function(o){ return o[0] === v; })) list = [[v, v]].concat(list);
+  return '<select class="inp" data-k="' + key + '" data-id="' + row.id + '" data-f="' + f + '">'
+    + list.map(function(o){ return '<option value="' + esc(o[0]) + '"' + (v === o[0] ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('')
+    + '</select>';
+}
+function dateCell(key, row, f, extraClass){
+  return '<span class="datewrap">'
+    + '<input class="inp ' + (extraClass || '') + '" type="date" data-k="' + key + '" data-id="' + row.id + '" data-f="' + f + '" value="' + esc(row[f] || '') + '">'
+    + '<button type="button" class="mini today" data-today="' + f + '" data-k="' + key + '" data-id="' + row.id + '" title="Set to today" aria-label="Set to today">T</button>'
+    + '</span>';
+}
+/* location = a free-text input with the firm's offices as suggestions:
+   forces one value, lets you pick a listed office OR type your own. */
+function cityInput(key, row, f){
+  var v = row[f] == null ? '' : row[f];
+  var sugg = officeSuggestions(row);
+  var listId = 'off-' + row.id + '-' + f;
+  var ph = officeList(row).length ? 'pick 1 of ' + sugg.length + ' offices — or type your own' : 'type a city / state';
+  return '<input class="inp" list="' + listId + '" data-k="' + key + '" data-id="' + row.id + '" data-f="' + f + '"'
+    + ' value="' + esc(v) + '" placeholder="' + esc(ph) + '" autocomplete="off" style="min-width:190px;">'
+    + '<datalist id="' + listId + '">' + sugg.map(function(o){ return '<option value="' + esc(o) + '"></option>'; }).join('') + '</datalist>';
+}
+/* line of work = free-text input. The dropdown offers only values THIS browser
+   has already entered in other rows (the user's own history) — no presets. */
+function lineInput(key, row, f){
+  var v = row[f] == null ? '' : row[f];
+  var listId = 'line-' + key + '-' + row.id;
+  var stored = kvGet(key, null), seen = {}, opts = [];
+  (Array.isArray(stored) ? stored : []).forEach(function(r){
+    var x = String(r && r[f] != null ? r[f] : '').trim();
+    if (x && !seen[x.toLowerCase()]){ seen[x.toLowerCase()] = 1; opts.push(x); }
+  });
+  opts.sort(function(a, b){ return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
+  return '<input class="inp" list="' + listId + '" data-k="' + key + '" data-id="' + row.id + '" data-f="' + f + '"'
+    + ' value="' + esc(v) + '" placeholder="your line of work" autocomplete="off" style="min-width:150px;">'
+    + '<datalist id="' + listId + '">' + opts.map(function(o){ return '<option value="' + esc(o) + '"></option>'; }).join('') + '</datalist>';
+}
+function chk(key, row, f){
+  return '<input type="checkbox" class="chk" data-k="' + key + '" data-id="' + row.id + '" data-f="' + f + '"' + (row[f] ? ' checked' : '') + '>';
+}
+function rowActs(key, id){
+  return '<button class="mini" data-up="' + id + '" data-k="' + key + '" title="Move up" aria-label="Move up">▲</button>'
+    + '<button class="mini" data-down="' + id + '" data-k="' + key + '" title="Move down" aria-label="Move down">▼</button>'
+    + '<button class="mini del" data-del="' + id + '" data-k="' + key + '" title="Delete" aria-label="Delete">×</button>';
+}
+
+/* ============================================================================
+   TAB: Pipeline
+   ========================================================================== */
+var KEY_PIPE = 'hs_pipeline';
+var curFilter = getStr('hs_filter', 'all');
+var curView = getStr('hs_pipe_view', 'cards');
+
+function pipeRows(){
+  var rows = getRows(KEY_PIPE, D.pipeline);
+  var changed = false;
+  function need(r, k, v){ if (r[k] == null) { r[k] = v; changed = true; } }
+  rows.forEach(function(r){
+    need(r, 'season', ''); need(r, 'startWhen', ''); need(r, 'industry', 'Public accounting');
+    need(r, 'acceptBy', ''); need(r, 'round2', false); need(r, 'offCulture', ''); need(r, 'offScore', ''); need(r, 'offNotes', '');
+    need(r, 'offices', FIRM_OFFICES[r.firm] || '');
+    STAGES.forEach(function(s){ need(r, s[0], false); need(r, s[0] + 'Date', ''); });
+    OFFER_FIELDS.forEach(function(f){ need(r, f[0], ''); });
+  });
+  if (changed) setRows(KEY_PIPE, rows);
+  return rows;
+}
+
+function renderPipeline(){
+  var rows = pipeRows();
+  var bad = conflicts(rows);
+  document.getElementById('p-pipeline').innerHTML = '<div id="pipe-aux"></div><div id="pipe-list"></div>';
+  renderPipeAux(rows, bad);
+  renderPipeList(rows, bad);
+  applyFilter();
+}
+
+/* aux = the widgets ABOVE the list (stat cards, conflict banner, offer-compare
+   table, funnel, filters). Rebuilt on any change, but its height only shifts
+   when a banner/offer appears — pipeTargeted() compensates for that. */
+function renderPipeAux(rows, bad){
+  rows = rows || pipeRows();
+  bad = bad || conflicts(rows);
+  var distinct = {};
+  rows.forEach(function(r){ var k = normFirm(r.firm); if (k) distinct[k] = 1; });
+
+  var cnt = { live:0, win:0, closed:0 };
+  STAGES.forEach(function(s){ cnt[s[0]] = 0; });
+  rows.forEach(function(r){
+    STAGES.forEach(function(s){ if (r[s[0]]) cnt[s[0]]++; });
+    var si = stageInfo(r);
+    var didIv = STAGES.some(function(s){ return r[s[0]] && stageIsInterview(s[1]); });
+    if (si.state === 'win') cnt.win++;
+    else if (si.state === 'closed') cnt.closed++;
+    else if (didIv) cnt.live++;
+  });
+  var confCount = Object.keys(bad).length;
+
+  var html = '<div class="cards">'
+    + card(rows.length, 'Firms')
+    + card(Object.keys(distinct).length, 'Distinct firms')
+    + card(confCount, 'Conflicts', confCount ? 'bad' : '')
+    + card(cnt.live, 'Interviewing')
+    + card(cnt.win, 'Offers', cnt.win ? 'good' : '')
+    + card(cnt.closed, 'Closed')
+    + '</div>';
+
+  if (confCount){
+    var seen = {}, lines = [];
+    Object.keys(bad).forEach(function(id){
+      var grp = bad[id];
+      var k = grp.map(function(r){ return r.id; }).sort().join('|');
+      if (seen[k]) return; seen[k] = 1;
+      lines.push('<b>' + esc(grp[0].firm || '(unnamed)') + '</b> — ' + grp.length + ' rows ('
+        + grp.map(function(r){ return esc(r.city || 'no location'); }).join(' · ')
+        + '). Pick one office and delete the rest.');
+    });
+    html += '<div class="warn"><b>&#9888; One location per firm.</b> Firms de-duplicate candidates across offices &mdash; a second office can auto-reject both.<br>'
+      + lines.join('<br>') + '</div>';
+  }
+
+  var offers = rows.filter(hasOffer);
+  if (offers.length){
+    html += '<div class="cmp"><table><caption>Offers on the table — compare before you accept</caption><thead><tr>'
+      + '<th>Firm</th><th>Location</th><th>Line</th><th>Season</th><th>Base</th><th>Bonus</th><th>OT pay</th>'
+      + '<th>CPA support</th><th>401k/health/PTO</th><th>Busy hrs</th><th>Culture /5</th><th>Fit /10</th><th>Accept by</th><th>Status</th>'
+      + '</tr></thead><tbody>'
+      + offers.map(function(r){
+          return '<tr><td>' + esc(r.firm || '') + '</td><td>' + esc(r.city || '') + '</td><td>' + esc(r.line || '') + '</td><td>' + esc(r.season || '') + '</td>'
+            + '<td>' + esc(r.offBase || '') + '</td><td>' + esc(r.offBonus || '') + '</td><td>' + esc(r.offOt || '') + '</td>'
+            + '<td>' + esc(r.offCpa || '') + '</td><td>' + esc(r.offBen || '') + '</td><td>' + esc(r.offHours || '') + '</td>'
+            + '<td>' + esc(r.offCulture || '') + '</td><td>' + esc(r.offScore || '') + '</td><td>' + esc(r.acceptBy || '') + '</td>'
+            + '<td>' + (r.outcome === 'accepted' ? '✔ accepted' : esc(optLabel(OUTCOME_OPTS, r.outcome))) + '</td></tr>';
+        }).join('')
+      + '</tbody></table></div>';
+  }
+
+  html += '<div class="funnel">'
+    + STAGES.map(function(s){ return '<span class="fu"><b>' + cnt[s[0]] + '</b>' + esc(s[1]) + '</span>'; }).join('')
+    + '</div>';
+
+  html += '<div class="stagemgr"><b>Application-process columns</b> '
+    + STAGES.map(function(s, i){
+        return '<span class="sm-chip">' + esc(s[1])
+          + '<button type="button" class="mini" data-stage-mv="' + i + '" data-dir="-1" title="Move earlier"' + (i === 0 ? ' disabled' : '') + '>&#9664;</button>'
+          + '<button type="button" class="mini" data-stage-mv="' + i + '" data-dir="1" title="Move later"' + (i === STAGES.length - 1 ? ' disabled' : '') + '>&#9654;</button>'
+          + '<button type="button" class="mini" data-stage-del="' + i + '" title="Remove this column">&times;</button>'
+          + '</span>';
+      }).join('')
+    + '<button type="button" class="tb-btn" data-stage-add="1">+ Add column</button>'
+    + '<button type="button" class="tb-btn" data-stage-reset="1" title="Restore the default columns">Reset columns</button>'
+    + '</div>';
+
+  html += '<div class="editnote">Each row is one firm = <b>one office</b> + <b>one line (Tax/Audit)</b> + <b>one season</b>. '
+    + 'The location box lists that firm&rsquo;s offices — pick one, or type your own. Every stage takes a date. '
+    + 'Set the outcome to <b>&ldquo;acceptance pending&rdquo;</b> and the accept-by date + <b>Offer details</b> open so you can compare offers. '
+    + 'Toggle <b>Cards / Table</b> at the right of the filters.</div>';
+
+  var FF = [['all','All'],['big4','Big 4'],['tax','Tax'],['audit','Audit'],['spring','Spring'],['summer','Summer'],
+           ['pub','Public'],['nonpub','Non-public'],['active','Interviewing'],['offers','Offers'],['closed','Closed'],['conflicts','Conflicts']];
+  html += '<div class="filters">'
+    + FF.map(function(f){ return '<button class="fbtn' + (curFilter === f[0] ? ' on' : '') + '" data-filter="' + f[0] + '">' + esc(f[1]) + '</button>'; }).join('')
+    + '<span class="viewtog">'
+      + '<button type="button" data-view="cards" class="' + (curView === 'cards' ? 'on' : '') + '">Cards</button>'
+      + '<button type="button" data-view="table" class="' + (curView === 'table' ? 'on' : '') + '">Table</button>'
+    + '</span></div>';
+
+  document.getElementById('pipe-aux').innerHTML = html;
+}
+
+function renderPipeList(rows, bad){
+  rows = rows || pipeRows();
+  bad = bad || conflicts(rows);
+  var html = (curView === 'table')
+    ? ptable(rows, bad)
+    : '<div class="pgrid">' + rows.map(function(r){ return pcard(r, !!bad[r.id]); }).join('') + '</div>';
+  html += '<button class="addbtn" data-add="' + KEY_PIPE + '">+ Add firm</button>';
+  document.getElementById('pipe-list').innerHTML = html;
+}
+
+/* In-place: rebuild ONE card/row + the aux widgets, and keep the card you
+   touched pinned to the same screen position so nothing scrolls under you. */
+function pipeTargeted(id){
+  var listEl = document.getElementById('pipe-list');
+  if (!listEl){ renderPipeline(); return; }
+  var before = listEl.querySelector('[data-id="' + id + '"]');
+  var anchored = !!(before && before.offsetParent);
+  var beforeTop = anchored ? before.getBoundingClientRect().top : 0;
+
+  var rows = pipeRows();
+  var bad = conflicts(rows);
+  var row = rows.filter(function(r){ return r.id === id; })[0];
+  var el = listEl.querySelector('[data-id="' + id + '"]');
+  if (row && el) el.outerHTML = (curView === 'table') ? ptrow(row, !!bad[id]) : pcard(row, !!bad[id]);
+  else renderPipeList(rows, bad);
+  renderPipeAux(rows, bad);
+  applyFilter();
+
+  if (anchored){
+    var after = listEl.querySelector('[data-id="' + id + '"]');
+    if (after && after.offsetParent){
+      var delta = after.getBoundingClientRect().top - beforeTop;
+      if (delta) window.scrollBy(0, delta);
+    }
+  }
+}
+
+function card(n, l, cls){
+  return '<div class="card' + (cls ? ' ' + cls : '') + '"><div class="n">' + n + '</div><div class="l">' + esc(l) + '</div></div>';
+}
+
+function rowDataAttrs(r, isConf, state){
+  return ' data-id="' + r.id + '" data-tier="' + esc(r.tier || '') + '" data-city="' + esc(r.city || '') + '" data-line="' + esc(r.line || '')
+    + '" data-season="' + esc(r.season || '') + '" data-industry="' + esc(r.industry || '') + '" data-state="' + state
+    + '" data-conf="' + (isConf ? 1 : 0) + '"';
+}
+
+function offerPanel(r){
+  var heading = (r.outcome === 'accepted')
+    ? 'Accepted offer — the numbers you chose'
+    : 'Offer on the table — enter the details to compare against your other offers';
+  var fields = OFFER_FIELDS.map(function(of){
+    return '<label>' + esc(of[1]) + edCell(KEY_PIPE, r, of[0], '') + '</label>';
+  }).join('');
+  return '<div class="offer">'
+    + '<h4>' + esc(heading) + '</h4>'
+    + '<div class="grid">'
+      + fields
+      + '<label>Culture / people /5' + selCell(KEY_PIPE, r, 'offCulture', RATE5) + '</label>'
+      + '<label>Overall fit /10' + selCell(KEY_PIPE, r, 'offScore', RATE10) + '</label>'
+      + '<label class="full">Decision notes — why this offer over the others' + edCell(KEY_PIPE, r, 'offNotes', '…', true) + '</label>'
+    + '</div></div>';
+}
+
+function pcard(r, isConf){
+  var si = stageInfo(r);
+  var offs = officeList(r);
+  var lockCls, lockTxt;
+  if (isConf){ lockCls = 'bad'; lockTxt = '⚠ 2nd ' + esc(r.firm || 'firm') + ' office — pick one'; }
+  else if (r.city && r.line){ lockCls = 'on'; lockTxt = '✓ Applying: ' + esc(r.city) + ' · ' + esc(r.line) + (r.season ? ' · ' + esc(r.season) : ''); }
+  else if (!r.city && offs.length){ lockCls = 'off'; lockTxt = 'Pick 1 of ' + offs.length + ' offices + line'; }
+  else { lockCls = 'off'; lockTxt = 'Pick a location + line'; }
+
+  var apply = r.url
+    ? '<a class="applybtn" href="' + esc(r.url) + '" target="_blank" rel="noopener" title="' + esc(r.url) + '">↗ Apply &middot; ' + esc(host(r.url)) + '</a>'
+    : '<button class="applybtn ghost" data-editurl="' + r.id + '" data-k="' + KEY_PIPE + '" data-urlf="url">+ apply link</button>';
+  var editUrl = r.url ? '<button class="mini" data-editurl="' + r.id + '" data-k="' + KEY_PIPE + '" data-urlf="url" title="Edit apply link">✎</button>' : '';
+
+  var steps = STAGES.map(function(s, i){
+    return '<div class="step-row">'
+      + '<label class="step' + (r[s[0]] ? ' done' : '') + '">' + chk(KEY_PIPE, r, s[0])
+        + '<span><b>' + (i + 1) + '. ' + esc(s[1]) + '</b>' + (s[2] ? '<em>' + esc(s[2]) + '</em>' : '') + '</span></label>'
+      + dateCell(KEY_PIPE, r, s[0] + 'Date', 'stepdate')
+      + '</div>';
+  }).join('');
+
+  var offerBlock = hasOffer(r)
+    ? '<label>Accept by' + dateCell(KEY_PIPE, r, 'acceptBy') + '</label>'
+    : '';
+
+  return '<div class="pcard state-' + si.state + (isConf ? ' conf' : '') + '"' + rowDataAttrs(r, isConf, si.state) + '>'
+
+    + '<div class="pc-top">'
+      + '<div class="pc-firm ed" contenteditable="true" role="textbox" tabindex="0" data-k="' + KEY_PIPE + '" data-id="' + r.id + '" data-f="firm" data-ph="Firm name">' + esc(r.firm || '') + '</div>'
+      + '<span class="pc-tier">' + selCell(KEY_PIPE, r, 'tier', TIER_OPTS) + '</span>'
+      + '<span class="pill p-' + si.state + '">' + esc(si.label) + '</span>'
+    + '</div>'
+
+    + '<div class="lock ' + lockCls + '">' + lockTxt + '</div>'
+
+    + '<div class="pc-row">'
+      + '<label>Location (pick one)' + cityInput(KEY_PIPE, r, 'city') + '</label>'
+      + '<label>Line of work' + lineInput(KEY_PIPE, r, 'line') + '</label>'
+      + '<label>Season / role' + selCell(KEY_PIPE, r, 'season', SEASON_OPTS) + '</label>'
+      + '<label>Path' + selCell(KEY_PIPE, r, 'industry', INDUSTRY_OPTS) + '</label>'
+    + '</div>'
+
+    + '<div class="offices-line"><b>' + esc(r.firm || 'Firm') + ' offices</b> (edit the list; pick one above): '
+      + '<span class="ed" contenteditable="true" role="textbox" tabindex="0" data-k="' + KEY_PIPE + '" data-id="' + r.id + '" data-f="offices" data-ph="Denver / Littleton, CO; Fort Lauderdale, FL; …">' + esc(r.offices || '') + '</span></div>'
+
+    + '<div class="pc-row">'
+      + '<label>Start (approx)' + edCell(KEY_PIPE, r, 'startWhen', 'e.g. Jan 2028') + '</label>'
+      + '<span style="display:flex;gap:5px;align-items:flex-end;">' + apply + editUrl + '</span>'
+    + '</div>'
+
+    + '<div class="pc-inside">'
+      + '<span class="tag">Man on the inside</span>'
+      + edCell(KEY_PIPE, r, 'contact', 'Name — your referral contact at this office')
+      + '<div class="ed role" contenteditable="true" role="textbox" tabindex="0" data-k="' + KEY_PIPE + '" data-id="' + r.id + '" data-f="contactRole" data-ph="Their title / how you know them (SUU alum, PAC, ward, recruiter…)">' + esc(r.contactRole || '') + '</div>'
+    + '</div>'
+
+    + '<div class="track">'
+      + '<div class="bar' + (si.state === 'closed' ? ' closed' : '') + '"><i style="width:' + si.pct + '%"></i></div>'
+      + '<div class="steps">' + steps + '</div>'
+    + '</div>'
+
+    + '<div class="pc-row">'
+      + '<label>Outcome' + selCell(KEY_PIPE, r, 'outcome', OUTCOME_OPTS) + '</label>'
+      + offerBlock
+      + '<label>Next step' + edCell(KEY_PIPE, r, 'next', 'e.g. send referral link to contact') + '</label>'
+      + '<label>Due' + dateCell(KEY_PIPE, r, 'nextDate') + '</label>'
+    + '</div>'
+
+    + (hasOffer(r) ? offerPanel(r) : '')
+
+    + edCell(KEY_PIPE, r, 'notes', 'Notes — recruiter name, interviewers, thank-you sent…', true)
+
+    + '<div style="display:flex;gap:5px;justify-content:flex-end;">' + rowActs(KEY_PIPE, r.id) + '</div>'
+  + '</div>';
+}
+
+function ptable(rows, bad){
+  var sh = STAGES.map(function(s, i){
+    var t = (i + 1) + '. ' + s[1] + (s[2] ? ' — ' + s[2] : '');
+    return '<th class="stg" title="' + esc(t) + '">' + esc(s[3]) + '</th>';
+  }).join('');
+  var head = '<tr><th>Firm</th><th>Tier</th><th>Path</th><th>Location (pick one)</th><th>Line</th><th>Season</th><th>Start ≈</th><th>Status</th>'
+    + sh + '<th>Outcome</th><th>Accept by</th><th>Base $</th><th>Fit /10</th><th>Next step</th><th>Due</th><th>Apply</th><th></th></tr>';
+  var body = rows.map(function(r){ return ptrow(r, !!bad[r.id]); }).join('');
+  return '<div class="tbl-wrap" tabindex="0" role="region" aria-label="Pipeline table"><table class="ptbl"><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>';
+}
+
+function ptrow(r, isConf){
+    var si = stageInfo(r);
+    var stg = STAGES.map(function(s){
+      return '<td class="stg">' + chk(KEY_PIPE, r, s[0]) + '<br>' + dateCell(KEY_PIPE, r, s[0] + 'Date') + '</td>';
+    }).join('');
+    var apply = r.url
+      ? '<a class="applybtn" style="padding:4px 9px;" href="' + esc(r.url) + '" target="_blank" rel="noopener" title="' + esc(r.url) + '">↗</a>'
+      : '<button class="mini" data-editurl="' + r.id + '" data-k="' + KEY_PIPE + '" data-urlf="url" title="Set apply link">+</button>';
+    var editUrl = r.url ? ' <button class="mini" data-editurl="' + r.id + '" data-k="' + KEY_PIPE + '" data-urlf="url" title="Edit link">✎</button>' : '';
+    return '<tr class="prow state-' + si.state + (isConf ? ' conf' : '') + '"' + rowDataAttrs(r, isConf, si.state) + '>'
+      + '<td style="min-width:140px;">' + edCell(KEY_PIPE, r, 'firm', 'Firm') + '</td>'
+      + '<td>' + selCell(KEY_PIPE, r, 'tier', TIER_OPTS) + '</td>'
+      + '<td>' + selCell(KEY_PIPE, r, 'industry', INDUSTRY_OPTS) + '</td>'
+      + '<td>' + cityInput(KEY_PIPE, r, 'city') + '</td>'
+      + '<td>' + lineInput(KEY_PIPE, r, 'line') + '</td>'
+      + '<td>' + selCell(KEY_PIPE, r, 'season', SEASON_OPTS) + '</td>'
+      + '<td style="min-width:92px;">' + edCell(KEY_PIPE, r, 'startWhen', 'Jan 2028') + '</td>'
+      + '<td><span class="pill p-' + si.state + '" title="' + esc(si.label) + '">' + (isConf ? '⚠ ' : '') + esc(si.label) + '</span></td>'
+      + stg
+      + '<td>' + selCell(KEY_PIPE, r, 'outcome', OUTCOME_OPTS) + '</td>'
+      + '<td>' + (hasOffer(r) ? dateCell(KEY_PIPE, r, 'acceptBy') : '<span style="color:var(--ink-faint);">—</span>') + '</td>'
+      + '<td style="min-width:90px;">' + (hasOffer(r) ? edCell(KEY_PIPE, r, 'offBase', '—') : '<span style="color:var(--ink-faint);">—</span>') + '</td>'
+      + '<td>' + (hasOffer(r) ? selCell(KEY_PIPE, r, 'offScore', RATE10) : '<span style="color:var(--ink-faint);">—</span>') + '</td>'
+      + '<td style="min-width:120px;">' + edCell(KEY_PIPE, r, 'next', 'next action') + '</td>'
+      + '<td>' + dateCell(KEY_PIPE, r, 'nextDate') + '</td>'
+      + '<td style="white-space:nowrap;">' + apply + editUrl + '</td>'
+      + '<td style="white-space:nowrap;">' + rowActs(KEY_PIPE, r.id) + '</td>'
+      + '</tr>';
+}
+
+function applyFilter(){
+  var f = curFilter;
+  document.querySelectorAll('#p-pipeline .fbtn').forEach(function(b){ b.classList.toggle('on', b.dataset.filter === f); });
+  document.querySelectorAll('#p-pipeline .pcard, #p-pipeline .prow').forEach(function(c){
+    var show = true;
+    var line = c.dataset.line || '', tier = c.dataset.tier || '',
+        st = c.dataset.state || '', season = c.dataset.season || '', ind = c.dataset.industry || '';
+    if (f === 'big4') show = tier === 'Big 4';
+    else if (f === 'tax') show = line === 'Tax';
+    else if (f === 'audit') show = line === 'Audit';
+    else if (f === 'spring') show = season.indexOf('Spring') > -1;
+    else if (f === 'summer') show = season.indexOf('Summer') > -1;
+    else if (f === 'pub') show = ind === 'Public accounting' || ind === '';
+    else if (f === 'nonpub') show = ind !== '' && ind !== 'Public accounting';
+    else if (f === 'active') show = st === 'live';
+    else if (f === 'offers') show = st === 'win';
+    else if (f === 'closed') show = st === 'closed';
+    else if (f === 'conflicts') show = c.dataset.conf === '1';
+    c.classList.toggle('hide', !show);
+  });
+}
+
+/* ============================================================================
+   TAB: CPA  (exam tracker + static reference — from Accounting Track STRAT)
+   ========================================================================== */
+var KEY_CPA = 'hs_cpa';
+function CPS(code, name, type, passRate, notes, status){
+  return { code:code, name:name, type:type, passRate:passRate, notes:notes, status:status || '', date:'', score:'' };
+}
+D.cpaSections = [
+  CPS('FAR','Financial Accounting and Reporting','core','~43%','Respect it or it will humble you.'),
+  CPS('AUD','Audit','core','~48%','Wordy, tricky, allergic to common sense.'),
+  CPS('REG','Regulation (tax and law)','core','~64%','Rules > vibes. Do the practice questions.'),
+  CPS('TCP','Tax and Compliance','disc','~78%','The discipline to take — most efficient path to the license.'),
+  CPS('ISC','Information Systems & Controls','disc','~68%','Skipped — you only need one discipline, and TCP passes more often.','skip'),
+  CPS('BAR','Business Analysis & Reporting','disc','~43%','Skipped — FAR’s revenge sequel, lowest discipline pass rate.','skip')
+];
+D.cpaRules = [
+  'You get 30 months to pass all 4 exams. The clock starts when you pass your first exam.',
+  'If a section expires → you lose that credit and must retake it.',
+  'If you fail → you can retake the same section as soon as scores release. No limit on attempts. The new score replaces the old one.',
+  'Score range 0–99. Passing score is 75. A 74 is a fail. Passing with a 75 is identical to passing with a 95.'
+];
+D.examDay = [
+  '4 hours total. You cannot pause the clock.',
+  'Bathroom breaks = your exam time still runs.',
+  'Once you exit a testlet, you cannot go back.',
+  'Built-in calculator only (except the spreadsheet tool). An Excel-like spreadsheet is available for sims.',
+  'No personal calculators, watches, notes, or lucky charms.',
+  '2 forms of ID required: 1 government-issued + 1 additional.',
+  'Taken at any Prometric Testing Center. Closest to SUU: St. George, Las Vegas, Lindon, Salt Lake City.'
+];
+D.utahReqs = [
+  ['Governing Body','Utah Division of Professional Licensing (DOPL) via NASBA','You apply through NASBA; Utah is the jurisdiction'],
+  ['Minimum Education','120 semester hours','Bachelor’s degree level from a regionally accredited school'],
+  ['Accounting Coursework','24 semester hours (upper-division)','Financial, Auditing, Tax, Managerial/Cost, AIS/Data Analytics'],
+  ['Business Coursework','24 semester hours','Business law, finance, economics, management, etc.'],
+  ['Degree Required','No specific degree title required','Accounting major not mandatory if coursework is met'],
+  ['Residency','None','You do NOT need to live in Utah'],
+  ['Citizenship','None','International candidates allowed']
+];
+D.cpaFees = [
+  ['Education Evaluation Fee','$93 (one-time)'],
+  ['Exam Section Application Fee','$356 per section'],
+  ['Exam Registration Fee','$93 per section'],
+  ['CPA Review Course','Gleim and Becker are most popular. Approx. $2,000.'],
+  ['State Ethics Exam','Required separately (varies by state).'],
+  ['Notice to Schedule (NTS)','Lists your name, approved exam section, expiration period, and launch code. Bring it to the exam to log in. Typically valid ~6 months; only one NTS per section at a time. Any exam not taken before the NTS expires is forfeited — no refunds.'],
+  ['Firm incentives','Most CPA firms reimburse exam fees and offer a $3,000–$7,000 bonus for passing all 4 sections within 1–2 years of employment.'],
+  ['Website','https://nasba.org/'],
+  ['Experience verification','https://commerce.utah.gov/wp-content/uploads/2022/12/verification-of-experience-for-licensure-as-a-CPA.pdf — have it signed and upload with your online CPA application.']
+];
+/* "Why this is worth it" — a reminder to reference during the hard weeks. */
+D.whyAccounting = 'When it gets hard, remember what finishing this actually buys you. This path is a set of skills and a credential that travel anywhere: '
+  + 'even outside accounting it opens doors to corporate leadership, law, M&A, consulting, real estate, teaching, and running your own business. '
+  + 'Along the way you build a working command of money, taxes, investing, and how companies really operate — knowledge that improves your own '
+  + 'financial life for good, in any career. It is one of the most recession-resistant professions there is, and every industry needs it. '
+  + 'The next few years are the price; the leverage lasts decades.';
+D.whyCpa = [
+  ['Higher salary', 'CPAs earn roughly 10–20% more than non-CPAs ($65–85k to start), tend to hold higher-level roles, and see 5–20%/yr raises in public accounting vs. 1–8% in industry.'],
+  ['Bang for your buck', 'One of the most respected, top-paying professions — for only 4–5 years of school. You enter the profession sooner and far cheaper than most other high-paying careers.'],
+  ['More options', 'A CPA can do everything a non-CPA can, plus what they cannot. More flexibility to find — or build — the path that fits you.'],
+  ['Security & stability', 'One of the most recession-resistant careers. Accountants are needed in every industry. The license is strong long-term job security.'],
+  ['Flexibility', 'Big city or small town, domestic or international, remote or in-office, private / government / non-profit, part- or full-time — and easy job mobility, because every field needs accountants.']
+];
+
+function renderCpa(){
+  var rows = getRows(KEY_CPA, D.cpaSections);
+  var changed = false;
+  rows.forEach(function(r){
+    if (r.status == null){ r.status = r.passed ? 'pass' : ''; changed = true; }
+    if (r.type === 'core' && r.status === 'skip'){ r.status = ''; changed = true; }   // core exams can't be skipped
+  });
+  if (changed) setRows(KEY_CPA, rows);
+  var passed = rows.filter(function(r){ return r.status === 'pass'; }).length;
+  var skipped = rows.filter(function(r){ return r.status === 'skip'; }).length;
+
+  var html = '<div class="note"><b>Pass 4 sections: the 3 core (FAR &middot; AUD &middot; REG) + 1 discipline.</b> '
+    + 'Default plan takes <b>TCP</b> as the discipline; <b>ISC</b> and <b>BAR</b> start skipped (you only need one, and TCP passes more often). '
+    + passed + ' passed &middot; ' + skipped + ' skipped.</div>';
+
+  html += '<h2 class="sec">Exam sections</h2>'
+    + '<div class="hint">Core exams: click the status to toggle <b>pass</b>. Disciplines: cycle <b>&mdash;</b> &rarr; <b>pass</b> &rarr; <b>skip</b>. Date and Score are yours to fill in.</div>'
+    + '<div class="tbl-wrap" tabindex="0"><table><thead><tr>'
+    + '<th>Section</th><th>Pass rate</th><th>The gist</th><th>Status</th><th>Date</th><th>Score</th></tr></thead><tbody>'
+    + rows.map(function(r){
+        var st = r.status || '';
+        var lab = st === 'pass' ? '✓ pass' : (st === 'skip' ? '– skip' : '— mark');
+        var stcls = st === 'pass' ? 'st-pass' : (st === 'skip' ? 'st-skip' : 'st-none');
+        var stTitle = r.type === 'core' ? 'click to toggle passed' : 'click to cycle: unset → pass → skip';
+        return '<tr' + (st ? ' class="cpa-' + st + '"' : '') + '>'
+          + '<td style="min-width:190px;"><b>' + esc(r.code) + '</b> '
+            + '<span class="pill ' + (r.type === 'core' ? 'p-live' : 'p-mute') + '">' + (r.type === 'core' ? 'core' : 'discipline') + '</span>'
+            + '<div style="font-size:10.5px;color:var(--ink-soft);">' + esc(r.name) + '</div></td>'
+          + '<td>' + esc(r.passRate) + '</td>'
+          + '<td style="min-width:200px;color:var(--ink-soft);">' + esc(r.notes) + '</td>'
+          + '<td><button type="button" class="cpast ' + stcls + '" data-cpastate="' + r.id + '" title="' + stTitle + '">' + lab + '</button></td>'
+          + '<td>' + dateCell(KEY_CPA, r, 'date') + '</td>'
+          + '<td style="min-width:56px;">' + edCell(KEY_CPA, r, 'score', '—') + '</td>'
+          + '</tr>';
+      }).join('')
+    + '</tbody></table></div>';
+
+  html += '<h2 class="sec">How licensure works</h2><ul class="tips">'
+    + '<li><b>Path:</b> bachelor&rsquo;s + 2 years experience, or master&rsquo;s + 1 year, then the CPA license.</li>'
+    + D.cpaRules.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+
+  html += '<h2 class="sec">Exam day</h2><ul class="tips">'
+    + D.examDay.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+
+  html += '<h2 class="sec">Utah requirements &amp; fees</h2>'
+    + '<h3 class="sub">Requirements</h3>'
+    + '<div class="tbl-wrap"><table><tbody>'
+    + D.utahReqs.map(function(t){ return '<tr><td style="min-width:150px;"><b>' + esc(t[0]) + '</b></td><td>' + esc(t[1])
+        + '</td><td style="color:var(--ink-soft);">' + esc(t[2]) + '</td></tr>'; }).join('')
+    + '</tbody></table></div>'
+    + '<h3 class="sub">Fees &amp; logistics</h3>'
+    + '<div class="tbl-wrap"><table><tbody>'
+    + D.cpaFees.map(function(t){ return '<tr><td style="min-width:150px;"><b>' + esc(t[0]) + '</b></td><td>' + autolink(t[1]) + '</td></tr>'; }).join('')
+    + '</tbody></table></div>';
+
+  html += '<h2 class="sec">Why this is worth it &mdash; a reminder for the hard weeks</h2>'
+    + '<div class="note">' + esc(D.whyAccounting) + '</div>'
+    + '<ul class="tips">' + D.whyCpa.map(function(w){ return '<li><b>' + esc(w[0]) + '</b> — <span class="d">' + esc(w[1]) + '</span></li>'; }).join('') + '</ul>';
+
+  document.getElementById('p-cpa').innerHTML = html;
+}
+
+/* ============================================================================
+   TAB: Paths
+   ========================================================================== */
+function renderPaths(){
+  var html = '<h2 class="sec">Every accounting career path — pros &amp; cons</h2>'
+    + '<div class="hint">The full landscape from the strategy doc, with where to apply under each group. Static reference — verify links before relying on them.</div>';
+  var groups = [];
+  D.careerPaths.forEach(function(c){ if (groups.indexOf(c[0]) < 0) groups.push(c[0]); });
+  groups.forEach(function(g){
+    html += '<h3 class="sub">' + esc(g) + '</h3>';
+    var lk = D.pathLinks[g];
+    if (lk) html += '<div class="linkrow" style="margin:2px 0 9px;"><b style="font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.4px;">Where to apply:</b> '
+      + lk.map(function(l){ return '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener">↗ ' + esc(l[0]) + '</a>'; }).join('') + '</div>';
+    html += '<div class="tbl-wrap"><table><thead><tr><th>Role</th><th>Pros</th><th>Cons</th></tr></thead><tbody>'
+      + D.careerPaths.filter(function(c){ return c[0] === g; }).map(function(c){
+          return '<tr><td style="min-width:150px;"><b>' + esc(c[1]) + '</b></td><td>' + esc(c[2]) + '</td><td>' + esc(c[3]) + '</td></tr>';
+        }).join('')
+      + '</tbody></table></div>';
+  });
+
+  html += '<h2 class="sec">Firm size — what the tiers actually mean</h2>'
+    + '<h3 class="sub">Top 10 Utah accounting firms by size</h3>'
+    + '<div class="tbl-wrap"><table><thead><tr><th>Firm</th><th>Tier</th><th>Approx. employees</th><th>Approx. CPAs</th><th>Location</th></tr></thead><tbody>'
+    + D.utahFirms.map(function(f){ return '<tr><td style="min-width:150px;"><b>' + esc(f[0]) + '</b></td><td>' + esc(f[1]) + '</td><td>' + esc(f[2]) + '</td><td>' + esc(f[3]) + '</td><td>' + esc(f[4]) + '</td></tr>'; }).join('')
+    + '</tbody></table></div>'
+    + '<h3 class="sub">How firm size is actually measured</h3>'
+    + '<ul class="tips">' + D.sizeMetrics.map(function(m){ return '<li><b>' + esc(m[0]) + '</b> — <span class="d">' + esc(m[1]) + '</span></li>'; }).join('') + '</ul>'
+    + '<div class="tipblock"><b>For your résumé and recruiting conversations, CPA count and revenue tier matter more than raw employee count</b> — recruiters and firms benchmark against each other on those numbers, not total headcount.</div>'
+    + '<h3 class="sub">Standard industry size brackets</h3>'
+    + '<ul class="tips">' + D.sizeBrackets.map(function(b){ return '<li><b>' + esc(b[0]) + '</b> — <span class="d">' + esc(b[1]) + '</span></li>'; }).join('') + '</ul>'
+    + '<h3 class="sub">Tradeoffs by tier</h3>'
+    + '<ul class="tips">' + D.tierTradeoffs.map(function(t){ return '<li><b>' + esc(t[0]) + '</b> — <span class="d">' + esc(t[1]) + '</span></li>'; }).join('') + '</ul>'
+    + '<div class="tipblock"><b>Also weigh office size.</b> A Big 4 firm with a 15-person satellite office can hand you the brand <em>and</em> small-team access at once — sometimes the best of both.</div>';
+
+  html += '<h2 class="sec">How accounting professors rank firm-selection traits</h2>'
+    + '<div class="hint">A ranking exercise: 10 accounting professors (shown anonymously as P1–P10) each ordered these 10 firm-selection traits 1–10 (each number used once, so every column sums to 55). '
+    + 'A gut-check on what experienced people actually weigh when choosing a firm — the point is the spread: culture and client focus cluster at one end, office aesthetic and benefits at the other, with salary, location and prestige in the middle.</div>'
+    + '<div class="tbl-wrap"><table><thead><tr><th>Trait</th>'
+    + D.profRankProfs.map(function(p){ return '<th>' + esc(p) + '</th>'; }).join('')
+    + '<th>Avg</th><th>Median</th></tr></thead><tbody>'
+    + D.profRankRows.map(function(r){
+        return '<tr><td style="min-width:170px;"><b>' + esc(r[0]) + '</b></td>'
+          + r[1].map(function(n){ return '<td style="text-align:center;">' + n + '</td>'; }).join('')
+          + '<td style="text-align:center;"><b>' + esc(r[2]) + '</b></td><td style="text-align:center;">' + esc(r[3]) + '</td></tr>';
+      }).join('')
+    + '<tr class="grouprow"><td>Sum tie-out</td>'
+    + D.profRankProfs.map(function(){ return '<td style="text-align:center;">55</td>'; }).join('')
+    + '<td style="text-align:center;">55.0</td><td></td></tr>'
+    + '</tbody></table></div>';
+
+  html += '<h2 class="sec">International office work — Audit vs. Tax mobility</h2>'
+    + '<ul class="tips">' + D.intlMobility.map(function(m){ return '<li><b>' + esc(m[0]) + '</b> — <span class="d">' + esc(m[1]) + '</span></li>'; }).join('') + '</ul>'
+    + '<h3 class="sub">When the moves actually happen</h3>'
+    + '<div class="tbl-wrap"><table><thead><tr><th>Career stage</th><th>Audit opportunities</th><th>Tax opportunities</th></tr></thead><tbody>'
+    + D.intlTimeline.map(function(t){ return '<tr><td style="min-width:130px;"><b>' + esc(t[0]) + '</b></td><td>' + esc(t[1]) + '</td><td>' + esc(t[2]) + '</td></tr>'; }).join('')
+    + '</tbody></table></div>';
+
+  document.getElementById('p-paths').innerHTML = html;
+}
+
+/* ============================================================================
+   TAB: Playbook  (static reference — no editable state)
+   ========================================================================== */
+function tipLi(t){
+  return '<li><b>' + esc(t.title) + '</b>' + (t.detail ? ' — <span class="d">' + esc(t.detail) + '</span>' : '')
+    + (t.url ? ' &nbsp;<a href="' + esc(t.url) + '" target="_blank" rel="noopener">↗ ' + esc(host(t.url)) + '</a>' : '') + '</li>';
+}
+function renderPlaybook(){
+  var html = '<div class="note"><b>The step-by-step sequence for each firm lives on the Pipeline tab</b> — the stage chips on every card '
+    + 'walk you from &ldquo;man on the inside&rdquo; to an offer. This tab is the static reference: tips and background pulled from the strategy doc.</div>';
+
+  html += '<h2 class="sec">Recruiting &amp; networking tips</h2><ul class="tips">'
+    + D.recruitTips.map(tipLi).join('') + '</ul>';
+
+  html += '<h2 class="sec">Application tips</h2>'
+    + '<h3 class="sub">Pre-Interview</h3><ul class="tips">' + D.preTips.map(tipLi).join('') + '</ul>'
+    + '<h3 class="sub">General Rules</h3><ul class="tips">' + D.generalTips.map(tipLi).join('') + '</ul>'
+    + '<h3 class="sub">Landing your first accounting-related role</h3><ul class="tips">' + D.landingTips.map(tipLi).join('') + '</ul>';
+
+  html += '<h2 class="sec">Course &amp; schedule tips</h2><ul class="tips">'
+    + D.courseTips.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'
+    + '<div class="tipblock pre"><b>Why take summer classes. Is summer semester for me?:</b>\n' + esc(D.summerWhy) + '</div>';
+
+  html += '<h2 class="sec">A standard SUU accounting &rarr; CPA timeline</h2>'
+    + '<div class="hint">The phases most SUU accounting students move through, with each link dropped where it actually matters. '
+    + 'Use it as the skeleton for your own plan (next section). Verify links before relying on them — school and firm URLs move.</div>'
+    + D.stdTimeline.map(function(p){
+        return '<h3 class="sub">' + esc(p[0]) + ' <span style="color:var(--ink-faint);font-weight:600;">&middot; ' + esc(p[1]) + '</span></h3>'
+          + '<ul class="tips">' + p[2].map(tipLi).join('') + '</ul>';
+      }).join('');
+
+  html += '<h2 class="sec">Build your own degree + internship + CPA plan</h2>'
+    + '<div class="note"><b>Make your own semester-by-semester roadmap.</b> '
+    + 'Lay out every term from now to CPA licensure with: the credits you take that term, a running total toward 120 (bachelor&rsquo;s) and 150 (CPA), the term your busy-season '
+    + 'internship lands (keep it class-free), when GradPath and the master&rsquo;s are due, and when you study and sit for each of the 4 CPA sections. Two rules do most of the work: '
+    + 'take accounting classes before finance classes, and don&rsquo;t stack Financial Accounting I with Financial II or Auditing. Fill in the brackets below and paste it into an AI. '
+    + 'Then drop the table it gives you into a spreadsheet and keep it live: re-run or hand-edit it as things change — an internship landing in summer vs. spring shifts every term after it, '
+    + 'and add rows for life factors that move the timeline (getting married, taking on more work hours, a scholarship falling through, switching your master&rsquo;s track).</div>'
+    + '<div class="promptbox"><button type="button" class="tb-btn copy" data-copy="planPrompt">Copy</button><pre id="planPrompt">' + esc(D.planPrompt) + '</pre></div>';
+
+  html += '<h2 class="sec">Guided city search &amp; career strategy prompt</h2>'
+    + '<div class="hint"><b>How to use:</b> Copy everything in the block below into an AI prompt window. Double-click any {} placeholder to replace it with your exact details.</div>'
+    + '<div class="promptbox"><button type="button" class="tb-btn copy" data-copy="cityPrompt">Copy</button><pre id="cityPrompt">' + esc(D.cityPrompt) + '</pre></div>';
+
+  document.getElementById('p-playbook').innerHTML = html;
+}
+
+/* ============================================================================
+   Wiring
+   ========================================================================== */
+var OWNER = {};
+OWNER[KEY_PIPE] = renderPipeline;
+OWNER[KEY_CPA] = renderCpa;
+
+function rerender(key){
+  var y = window.scrollY;
+  (OWNER[key] || function(){})();
+  window.scrollTo(0, y);
+}
+
+document.addEventListener('focusout', function(e){
+  var el = e.target;
+  if (!el.classList || !el.classList.contains('ed') || !el.dataset.f) return;
+  var rows = getRows(el.dataset.k, []);
+  var row = rows.filter(function(r){ return r.id === el.dataset.id; })[0];
+  if (!row) return;
+  var val = readEd(el);
+  if (row[el.dataset.f] === val) return;
+  row[el.dataset.f] = val;
+  if (el.dataset.k === KEY_PIPE && el.dataset.f === 'firm' && !row.offices){
+    row.offices = FIRM_OFFICES[val] || '';
+  }
+  setRows(el.dataset.k, rows);
+  if (el.dataset.k === KEY_PIPE){
+    /* firm / offices change the card structure; every other text field does not,
+       so leave the card (and your focus) alone and only refresh the summary bits. */
+    if (el.dataset.f === 'firm' || el.dataset.f === 'offices') pipeTargeted(el.dataset.id);
+    else renderPipeAux();
+  } else rerender(el.dataset.k);
+});
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Enter' && e.target.classList && e.target.classList.contains('ed') && !e.target.classList.contains('long')){
+    e.preventDefault(); e.target.blur();
+  }
+});
+document.addEventListener('change', function(e){
+  var el = e.target;
+  if (el.dataset && el.dataset.str){ kvSet(el.dataset.str, el.value); return; }
+  if (!el.dataset || !el.dataset.f) return;
+  var rows = getRows(el.dataset.k, []);
+  var row = rows.filter(function(r){ return r.id === el.dataset.id; })[0];
+  if (!row) return;
+  row[el.dataset.f] = (el.type === 'checkbox') ? el.checked : el.value;
+  setRows(el.dataset.k, rows);
+  if (el.dataset.k === KEY_PIPE) pipeTargeted(el.dataset.id);
+  else rerender(el.dataset.k);
+});
+
+document.addEventListener('click', function(e){
+  var b = e.target.closest && e.target.closest('button');
+  if (!b) return;
+
+  if (b.dataset.stageAdd != null){
+    var snm = (prompt('New application-process column\n(e.g. "Recruiter screen", "Case study", "Offer call"):') || '').trim();
+    if (snm){ STAGES.push([stageKey(snm), snm, '', snm]); persistStages(); }
+    return;
+  }
+  if (b.dataset.stageReset != null){
+    if (confirm('Restore the default application-process columns?\n\nCustom columns you added are removed. Any dates you entered under them stay in the saved data, just hidden.')){
+      kvSet('hs_stages', null); STAGES = loadStages(); rerender(KEY_PIPE);
+    }
+    return;
+  }
+  if (b.dataset.stageMv != null){
+    var smi = +b.dataset.stageMv, sdir = +b.dataset.dir, smj = smi + sdir;
+    if (smj >= 0 && smj < STAGES.length){ var st = STAGES[smi]; STAGES[smi] = STAGES[smj]; STAGES[smj] = st; persistStages(); }
+    return;
+  }
+  if (b.dataset.stageDel != null){
+    var sdi = +b.dataset.stageDel;
+    if (STAGES[sdi] && confirm('Remove the "' + STAGES[sdi][1] + '" column?\n\nDates already entered under it stay in the saved data but stop showing.')){
+      STAGES.splice(sdi, 1); persistStages();
+    }
+    return;
+  }
+  if (b.dataset.copy){
+    var src = document.getElementById(b.dataset.copy);
+    if (src && navigator.clipboard) navigator.clipboard.writeText(src.textContent).then(function(){ toast('Copied to clipboard.'); });
+    else if (src){ var rng = document.createRange(); rng.selectNodeContents(src); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(rng); toast('Selected — press Ctrl/Cmd+C.'); }
+    return;
+  }
+  if (b.dataset.cpastate){
+    var cr = getRows(KEY_CPA, []);
+    var crow = cr.filter(function(r){ return r.id === b.dataset.cpastate; })[0];
+    if (!crow) return;
+    if (crow.type === 'core') crow.status = crow.status === 'pass' ? '' : 'pass';
+    else crow.status = crow.status === 'pass' ? 'skip' : (crow.status === 'skip' ? '' : 'pass');
+    setRows(KEY_CPA, cr);
+    rerender(KEY_CPA);
+    return;
+  }
+  if (b.dataset.today){
+    var tk = b.dataset.k, tid = b.dataset.id, tf = b.dataset.today;
+    var trows = getRows(tk, []);
+    var trow = trows.filter(function(r){ return r.id === tid; })[0];
+    if (!trow) return;
+    var dn = new Date();
+    trow[tf] = dn.getFullYear() + '-' + String(dn.getMonth() + 1).padStart(2, '0') + '-' + String(dn.getDate()).padStart(2, '0');
+    setRows(tk, trows);
+    if (tk === KEY_PIPE) pipeTargeted(tid);
+    else rerender(tk);
+    return;
+  }
+  if (b.dataset.view){
+    curView = b.dataset.view;
+    kvSet('hs_pipe_view', curView);
+    renderPipeline();
+    return;
+  }
+  if (b.dataset.filter){
+    curFilter = b.dataset.filter; kvSet('hs_filter', curFilter);
+    var fSel = '#pipe-list .pcard:not(.hide), #pipe-list .prow:not(.hide)';
+    var fa = document.querySelector(fSel);
+    var ft = fa ? fa.getBoundingClientRect().top : null;
+    applyFilter();
+    if (ft != null){ var fa2 = document.querySelector(fSel); if (fa2) window.scrollBy(0, fa2.getBoundingClientRect().top - ft); }
+    return;
+  }
+  if (b.dataset.add){
+    var key = b.dataset.add;
+    var rows = getRows(key, []);
+    var blank = { id: uid() };
+    if (key === KEY_PIPE){ var t = P('', 'Top 100', '', '', '', ''); for (var k in t) blank[k] = t[k]; blank.id = uid(); }
+    rows.push(blank);
+    setRows(key, rows);
+    rerender(key);
+    return;
+  }
+  if (b.dataset.editurl){
+    var key2 = b.dataset.k;
+    var rs = getRows(key2, []);
+    var rw = rs.filter(function(r){ return r.id === b.dataset.editurl; })[0];
+    if (!rw) return;
+    var next = prompt('Apply / careers link for this firm:', rw[b.dataset.urlf] || 'https://');
+    if (next === null) return;
+    rw[b.dataset.urlf] = (next.trim() === 'https://') ? '' : next.trim();
+    setRows(key2, rs);
+    rerender(key2);
+    return;
+  }
+  if (b.dataset.del){
+    var key3 = b.dataset.k;
+    var before = getRows(key3, []);
+    var victim = before.filter(function(r){ return r.id === b.dataset.del; })[0];
+    setRows(key3, before.filter(function(r){ return r.id !== b.dataset.del; }));
+    rerender(key3);
+    var lbl = victim ? (victim.firm || victim.name || 'row') : 'row';
+    toast('Deleted “' + lbl + '”.', function(){ setRows(key3, before); rerender(key3); });
+    return;
+  }
+  if (b.dataset.up || b.dataset.down){
+    var key4 = b.dataset.k;
+    var dir = b.dataset.up ? -1 : 1;
+    var id = b.dataset.up || b.dataset.down;
+    var arr = getRows(key4, []);
+    var i = -1; arr.forEach(function(r, ix){ if (r.id === id) i = ix; });
+    var j = i + dir;
+    if (i < 0 || j < 0 || j >= arr.length) return;
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    setRows(key4, arr);
+    rerender(key4);
+    return;
+  }
+});
+
+/* ---- tabs ---- */
+var TABS = [['pipeline', 'Pipeline'], ['paths', 'Paths'], ['cpa', 'CPA'], ['playbook', 'Playbook']];
+(function buildTabs(){
+  var wrap = document.getElementById('tabs');
+  wrap.setAttribute('role', 'tablist');
+  wrap.innerHTML = TABS.map(function(t, i){
+    return '<button type="button" class="tab' + (i === 0 ? ' active' : '') + '" data-tab="' + t[0] + '"'
+      + ' role="tab" aria-selected="' + (i === 0) + '" tabindex="' + (i === 0 ? '0' : '-1') + '">' + t[1] + '</button>';
+  }).join('');
+  function select(b, focus){
+    if (!b) return;
+    wrap.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('active'); x.setAttribute('aria-selected', 'false'); x.setAttribute('tabindex', '-1'); });
+    b.classList.add('active'); b.setAttribute('aria-selected', 'true'); b.setAttribute('tabindex', '0');
+    if (focus) b.focus();
+    document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+    var panel = document.getElementById('p-' + b.dataset.tab);
+    if (panel) panel.classList.add('active');
+    kvSet('hs_last_tab', b.dataset.tab);
+  }
+  wrap.addEventListener('click', function(e){ var b = e.target.closest('.tab'); if (b) select(b, false); });
+  wrap.addEventListener('keydown', function(e){
+    var m = { ArrowRight:1, ArrowLeft:-1, Home:'first', End:'last' };
+    if (!(e.key in m)) return;
+    var all = [].slice.call(wrap.querySelectorAll('.tab'));
+    var i = all.indexOf(document.activeElement);
+    if (i < 0) return;
+    e.preventDefault();
+    var next = m[e.key] === 'first' ? all[0] : m[e.key] === 'last' ? all[all.length - 1] : all[(i + m[e.key] + all.length) % all.length];
+    select(next, true);
+  });
+})();
+
+/* ---- header tools ---- */
+var ALL_KEYS = ['hs_pipeline','hs_cpa','hs_filter','hs_pipe_view','hs_last_tab','hs_stages'];
+function exportBackup(){
+  var payload = {};
+  ALL_KEYS.forEach(function(k){ var v = kvGet(k, undefined); if (v !== undefined) payload[k] = v; });
+  var blob = new Blob([JSON.stringify({ exported: new Date().toISOString(), data: payload }, null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'hiring-pipeline-' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  toast('Backup downloaded.');
+}
+function importBackup(file){
+  var fr = new FileReader();
+  fr.onload = function(){
+    var parsed;
+    try { parsed = JSON.parse(fr.result); } catch(e){ alert('That file is not valid JSON.'); return; }
+    var data = parsed && parsed.data ? parsed.data : parsed;
+    if (!data || typeof data !== 'object'){ alert('That does not look like a backup from this page.'); return; }
+    if (!confirm('Restore this backup? Everything currently on the board is replaced.')) return;
+    Object.keys(data).forEach(function(k){ kvSet(k, data[k]); });
+    curFilter = getStr('hs_filter', 'all');
+    curView = getStr('hs_pipe_view', 'cards');
+    STAGES = loadStages();
+    renderAll();
+    toast('Restored.');
+  };
+  fr.readAsText(file);
+}
+document.getElementById('btnExport').addEventListener('click', exportBackup);
+document.getElementById('btnImport').addEventListener('click', function(){ document.getElementById('fileImport').click(); });
+document.getElementById('fileImport').addEventListener('change', function(e){ if (e.target.files && e.target.files[0]) importBackup(e.target.files[0]); e.target.value = ''; });
+document.getElementById('btnPrint').addEventListener('click', function(){ window.print(); });
+document.getElementById('btnReset').addEventListener('click', function(){
+  if (!confirm('Wipe the whole tool and reload the starter pipeline, paths and CPA tracker?\n\nExport a backup first if you want to keep your progress.')) return;
+  ALL_KEYS.forEach(function(k){ try { localStorage.removeItem(k); } catch(e){} });
+  curFilter = 'all'; curView = 'cards'; STAGES = loadStages();
+  renderAll();
+  toast('Reset to the starter board.');
+});
+
+/* ---- boot ---- */
+function renderAll(){ renderPipeline(); renderPaths(); renderCpa(); renderPlaybook(); }
+renderAll();
+(function restoreTab(){
+  var last = getStr('hs_last_tab', 'pipeline');
+  var btn = document.querySelector('.tab[data-tab="' + last + '"]');
+  if (btn) btn.click();
+})();
+</script>
+</body>
+</html>
