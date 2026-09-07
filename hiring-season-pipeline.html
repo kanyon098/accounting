@@ -721,12 +721,12 @@ D.recruitTips = [
   TP('Always be gracious', 'If you get an offer and do not accept, be very kind and respectful. Thank them for their time. Keep the door open. You might need a job from them later.')
 ];
 D.courseTips = [
-  'Degree Works: Take ACCT 2010 first semester if possible. Knock out hard generals.',
-  'Spread apart your easy generals across your semesters to balance harder courses — unless you plan to switch universities, then get your associates ASAP.',
-  'Peer crowd-source on when to take what classes and from what professors.',
-  'Take your accounting classes before your finance classes so you can name-drop aced classes in interviews. Allows you to interview earlier.',
-  'Take as few total classes as possible. Don’t waste time with irrelevant classes.',
-  'Pick one major. Employers don’t care about minors. Double majors still only get you one degree. If you want more education, opt for the dual Masters.'
+  TP('Degree Works', 'Take ACCT 2010 first semester if possible. Knock out hard generals.'),
+  TP('Spread apart your easy generals across your semesters', 'To balance harder courses — unless you plan to switch universities, then get your associate’s ASAP.'),
+  TP('Peer crowd-source', 'On when to take what classes and from what professors.'),
+  TP('Take accounting classes before finance classes', 'So you can name-drop aced classes in interviews. Also lets you interview earlier.'),
+  TP('Take as few total classes as possible', 'Don’t waste time with irrelevant classes.'),
+  TP('Pick one major', 'Employers don’t care about minors. Double majors still only get you one degree. If you want more education, opt for the dual master’s.')
 ];
 D.landingTips = [
   TP('Get the closest-to-accounting job you can, as early as you can',
@@ -1505,7 +1505,7 @@ function renderPlaybook(){
     + '<h3 class="sub">Landing your first accounting-related role</h3><ul class="tips">' + D.landingTips.map(tipLi).join('') + '</ul>';
 
   html += '<h2 class="sec">Course &amp; schedule tips</h2><ul class="tips">'
-    + D.courseTips.map(function(t){ return '<li>' + esc(endPunct(t)) + '</li>'; }).join('') + '</ul>'
+    + D.courseTips.map(tipLi).join('') + '</ul>'
     + '<div class="tipblock pre"><b>Why take summer classes. Is summer semester for me?:</b>\n' + esc(D.summerWhy) + '</div>';
 
   html += '<h2 class="sec">A standard SUU accounting &rarr; CPA timeline</h2>'
