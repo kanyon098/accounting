@@ -1484,8 +1484,12 @@ function renderPaths(){
 /* ============================================================================
    TAB: Playbook  (static reference — no editable state)
    ========================================================================== */
+/* append a period unless the text already ends in terminal punctuation */
+function endPunct(s){ s = String(s == null ? '' : s).trim(); return (!s || /[.!?…]$/.test(s)) ? s : s + '.'; }
 function tipLi(t){
-  return '<li><b>' + esc(t.title) + '</b>' + (t.detail ? ' — <span class="d">' + esc(t.detail) + '</span>' : '')
+  var last = t.detail ? '' : endPunct(t.title);
+  return '<li><b>' + esc(t.detail ? t.title : last) + '</b>'
+    + (t.detail ? ' — <span class="d">' + esc(endPunct(t.detail)) + '</span>' : '')
     + (t.url ? ' &nbsp;<a href="' + esc(t.url) + '" target="_blank" rel="noopener">↗ ' + esc(host(t.url)) + '</a>' : '') + '</li>';
 }
 function renderPlaybook(){
@@ -1501,7 +1505,7 @@ function renderPlaybook(){
     + '<h3 class="sub">Landing your first accounting-related role</h3><ul class="tips">' + D.landingTips.map(tipLi).join('') + '</ul>';
 
   html += '<h2 class="sec">Course &amp; schedule tips</h2><ul class="tips">'
-    + D.courseTips.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'
+    + D.courseTips.map(function(t){ return '<li>' + esc(endPunct(t)) + '</li>'; }).join('') + '</ul>'
     + '<div class="tipblock pre"><b>Why take summer classes. Is summer semester for me?:</b>\n' + esc(D.summerWhy) + '</div>';
 
   html += '<h2 class="sec">A standard SUU accounting &rarr; CPA timeline</h2>'
