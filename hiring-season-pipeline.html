@@ -1339,12 +1339,22 @@ D.cpaFees = [
   ['Education Evaluation Fee','$93 (one-time)'],
   ['Exam Section Application Fee','$356 per section'],
   ['Exam Registration Fee','$93 per section'],
-  ['CPA Review Course','Gleim and Becker are most popular. Approx. $2,000.'],
+  ['CPA Review Course','Gleim and Becker are most popular — see Becker package pricing below. Approx. $2,500–$6,500 depending on package.'],
   ['State Ethics Exam','Required separately (varies by state).'],
   ['Notice to Schedule (NTS)','Lists your name, approved exam section, expiration period, and launch code. Bring it to the exam to log in. Typically valid ~6 months; only one NTS per section at a time. Any exam not taken before the NTS expires is forfeited — no refunds.'],
   ['Firm incentives','Most CPA firms reimburse exam fees and offer a $3,000–$7,000 bonus for passing all 4 sections within 1–2 years of employment.'],
   ['Website','https://nasba.org/'],
+  ['Exam candidate handbook','https://www.dca.ca.gov/cba/applicants/exam-candidate.shtml — general exam-candidate reference: eligibility, ID rules, testing windows.'],
   ['Experience verification','https://commerce.utah.gov/wp-content/uploads/2022/12/verification-of-experience-for-licensure-as-a-CPA.pdf — have it signed and upload with your online CPA application.']
+];
+/* Becker CPA review course packages — https://www.becker.com/cpa-review/course-demos */
+D.beckerPackages = [
+  ['Advantage','$2,499','24 months. Core course and AI tutor'],
+  ['Premium','$3,099','Unlimited. Printed books, Final Review'],
+  ['Pro','$3,845','Unlimited. $1,000 Pass Guarantee ($250 per failed section, up to 4, if you finish most of the course and test within 12 months), live classes, tutoring'],
+  ['Pro+','$4,044','Unlimited. Accounting refresher course'],
+  ['Concierge','$6,349','Unlimited. 100% money-back guarantee (25% of your price back per failed section, up to 4, same conditions as Pro), full coaching'],
+  ['Compare packages','—','Watch demos of each package: https://www.becker.com/cpa-review/course-demos']
 ];
 /* "Why this is worth it" — a reminder to reference during the hard weeks. */
 D.whyAccounting = 'When it gets hard, remember what finishing this actually buys you. This path is a set of skills and a credential that travel anywhere: '
@@ -1413,6 +1423,10 @@ function renderCpa(){
     + '<h3 class="sub">Fees &amp; logistics</h3>'
     + '<div class="tbl-wrap"><table><tbody>'
     + D.cpaFees.map(function(t){ return '<tr><td style="min-width:150px;"><b>' + esc(t[0]) + '</b></td><td>' + autolink(t[1]) + '</td></tr>'; }).join('')
+    + '</tbody></table></div>'
+    + '<h3 class="sub">Becker CPA review course &mdash; package pricing</h3>'
+    + '<div class="tbl-wrap"><table><thead><tr><th>Package</th><th>Price</th><th>Access and unique features</th></tr></thead><tbody>'
+    + D.beckerPackages.map(function(p){ return '<tr><td style="min-width:110px;"><b>' + esc(p[0]) + '</b></td><td>' + esc(p[1]) + '</td><td>' + autolink(p[2]) + '</td></tr>'; }).join('')
     + '</tbody></table></div>';
 
   html += '<h2 class="sec">Why this is worth it &mdash; a reminder for the hard weeks</h2>'
