@@ -748,6 +748,19 @@ D.generalTips = [
   TP('Reputation', 'Be personable, consistent, honest — represent SUU Accounting well.'),
   TP('DO NOT sign an offer and retract it', 'To maintain a good reputation for SUU Accounting, and your own brand, do not break a contract or double sign.')
 ];
+/* Authoritative standards, laws & regulations — one navigation page per governing body.
+   [title, which division of accounting it's for, [url, ...]] — paired when two links are the
+   same body's companion standards (AICPA SASs + SSARSs). */
+D.stdsRefs = [
+  ['FASB Accounting Standards Codification (ASC)', 'Financial accounting — the single authoritative source of U.S. GAAP for private-sector companies (public and nonpublic alike).', ['https://asc.fasb.org/Home']],
+  ['GASB Accounting Research System (GARS)', 'Governmental accounting — GAAP for state and local governments.', ['https://gars.gasb.org/Home']],
+  ['IRS — tax code, regulations & official guidance', 'Tax accounting — the Internal Revenue Code, Treasury regulations, and IRS rulings and guidance.', ['https://www.irs.gov/privacy-disclosure/tax-code-regulations-and-official-guidance']],
+  ['PCAOB — auditing standards', 'Audit — auditing, quality-control, ethics and independence standards for audits of public companies ("issuers").', ['https://pcaobus.org/oversight/standards/']],
+  ['IFRS — list of issued standards', 'Financial accounting (international) — the GAAP used outside the U.S. by most of the world.', ['https://www.ifrs.org/issued-standards/list-of-standards/']],
+  ['SEC — major securities laws, rules & regulations', 'SEC reporting / financial accounting compliance — the securities laws and rules that govern public-company financial reporting and disclosure.', ['https://www.sec.gov/rules-regulations/statutes-regulations/rules-regulations-securities-exchange-commission-major-securities-laws']],
+  ['AICPA — Statements on Auditing Standards (SASs) & SSARSs', 'Audit & assurance for nonpublic/private companies — SASs govern audits of nonissuers; SSARSs govern compilations and reviews.', ['https://www.aicpa-cima.com/resources/download/aicpa-statements-on-auditing-standards-currently-effective', 'https://www.aicpa-cima.com/resources/download/aicpa-ssarss-currently-effective']],
+  ['IAASB — standards & pronouncements', 'Audit (international) — the International Standards on Auditing (ISA) used outside the U.S.', ['https://www.iaasb.org/standards-pronouncements']]
+];
 /* --- link registry pulled from the strategy doc --- */
 /* A standard SUU accounting -> CPA timeline, with each link dropped at the point
    it actually matters. [phase, when, [ {title, detail, url} ... ]] */
@@ -1522,6 +1535,13 @@ function renderPlaybook(){
   html += '<h2 class="sec">Course &amp; schedule tips</h2><ul class="tips">'
     + D.courseTips.map(tipLi).join('') + '</ul>'
     + '<div class="tipblock pre"><b>Why take summer classes. Is summer semester for me?:</b>\n' + esc(D.summerWhy) + '</div>';
+
+  html += '<h2 class="sec">Authoritative accounting standards, laws &amp; regulations</h2>'
+    + '<div class="hint">The primary navigation page for each governing body&rsquo;s standards, codes and pronouncements &mdash; bookmark these instead of a summary site.</div>'
+    + '<ul class="tips">' + D.stdsRefs.map(function(r){
+        var links = r[2].map(function(u){ return '<a href="' + esc(u) + '" target="_blank" rel="noopener">↗ ' + esc(host(u)) + '</a>'; }).join(' &nbsp;');
+        return '<li><b>' + esc(r[0]) + '</b> — <span class="d">' + esc(r[1]) + '</span> &nbsp;' + links + '</li>';
+      }).join('') + '</ul>';
 
   html += '<h2 class="sec">A standard SUU accounting &rarr; CPA timeline</h2>'
     + '<div class="hint">The phases most SUU accounting students move through, with each link dropped where it actually matters. '
