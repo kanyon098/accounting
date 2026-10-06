@@ -1468,14 +1468,12 @@ function renderCpa(){
 
   html += '<h2 class="sec">Simulation (TBS) time strategy</h2>'
     + '<div class="note">Perfect MCQ alone (100%) is only worth about 50 points (0.50 &times; 99) &mdash; about 59 in ISC (0.60 &times; 99). '
-    + 'Passing is 75. Max your MCQ and you still need roughly 51 on sims (about 39 in ISC) &mdash; sims are not optional.</div>'
+    + 'Passing is 75, so sims are not optional &mdash; max your MCQ and you still need roughly 51 on sims (about 39 in ISC).</div>'
     + '<h3 class="sub">Time budget per sim</h3>'
-    + '<div class="hint">240 minutes total. Hold back a 15-minute cushion you don&rsquo;t pre-assign &mdash; insurance for a sim that runs long.</div>'
-    + '<div class="tbl-wrap"><table><thead><tr><th>Section</th><th>Target (aim for this)</th><th>Ceiling (absolute max)</th></tr></thead><tbody>'
+    + '<div class="hint">240 minutes total, with a 15-minute cushion held back for a sim that runs long. <b>Target</b> keeps that cushion intact; <b>ceiling</b> spends it to zero.</div>'
+    + '<div class="tbl-wrap"><table><thead><tr><th>Section</th><th>Target</th><th>Ceiling</th></tr></thead><tbody>'
     + D.simTimeTargets.map(function(r){ return '<tr><td style="min-width:60px;"><b>' + esc(r[0]) + '</b></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>'; }).join('')
     + '</tbody></table></div>'
-    + '<div class="tipblock"><b>Target</b> — hit this on every sim and you finish with 15 minutes to spare. <b>Ceiling</b> — hit this on every sim and you finish with zero minutes left. '
-    + 'AUD math &mdash; Target: (240 &minus; 100 MCQ &minus; 15 cushion) &divide; 7 sims &asymp; 18 min. Ceiling: (240 &minus; 100 MCQ) &divide; 7 sims = 20 min.</div>'
     + '<h3 class="sub">Overall approach</h3><ul class="tips">'
     + D.simStrategyTips.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'
     + '<h3 class="sub">Ranking sims &mdash; easiest first</h3>'
@@ -1485,7 +1483,7 @@ function renderCpa(){
     + D.simEasySignals.map(function(r){ return '<tr><td style="min-width:70px;"><b>' + esc(r[0]) + '</b></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>'; }).join('')
     + '</tbody></table></div>'
     + '<h3 class="sub">Budget by testlet, not by sim</h3>'
-    + '<div class="hint">Easy sims get less time, hard sims get more &mdash; these splits already have the 15-minute cushion baked in.</div>'
+    + '<div class="hint">The same per-sim target, split across a testlet&rsquo;s 2 or 3 sims &mdash; easy gets less time, hard gets more.</div>'
     + '<div class="tbl-wrap"><table><thead><tr><th>Section</th><th>3-sim testlet (easy / medium / hard)</th><th>2-sim testlet (easier / harder)</th></tr></thead><tbody>'
     + D.simTestletBudget.map(function(r){ return '<tr><td style="min-width:60px;"><b>' + esc(r[0]) + '</b></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>'; }).join('')
     + '</tbody></table></div>'
