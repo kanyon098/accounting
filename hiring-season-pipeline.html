@@ -1339,6 +1339,46 @@ D.examDay = [
   '2 forms of ID required: 1 government-issued + 1 additional.',
   'Taken at any Prometric Testing Center. Closest to SUU: St. George, Las Vegas, Lindon, Salt Lake City.'
 ];
+/* Sim (TBS) time budget — [section, target per sim, ceiling per sim]. Target leaves the
+   15-min cushion intact; ceiling spends the cushion to zero. */
+D.simTimeTargets = [
+  ['REG', '16 min', '18 min'],
+  ['AUD', '18 min', '20 min'],
+  ['FAR', '20 min', '23 min']
+];
+D.simStrategyTips = [
+  'Rank every sim in a testlet and do the easiest first.',
+  'Read the requirements, then skim — don’t fully read — the exhibits.',
+  'Write out formulas as each sim needs them.',
+  'Never leave a blank — a guess beats a zero.',
+  'If a blank stalls you past 2 minutes, guess and move on.'
+];
+/* Signals for ranking a testlet's sims easiest-first — [signal, easier, harder]. */
+D.simEasySignals = [
+  ['Topic', 'You know the rule instantly', '“Uh oh” feeling'],
+  ['Format', 'Dropdowns, matching', 'Typed numbers, journal entries'],
+  ['Calcs', 'Blanks stand alone', 'Blanks depend on each other'],
+  ['Exhibits', '1 to 3 short', '5+ or long'],
+  ['Blanks', 'Few', 'Many']
+];
+/* Per-testlet time split (uses target times) — [section, 3-sim split, 2-sim split]. */
+D.simTestletBudget = [
+  ['REG', '13 / 16 / 19 (48 min)', '14 / 18 (32 min)'],
+  ['AUD', '15 / 18 / 21 (54 min)', '16 / 20 (36 min)'],
+  ['FAR', '17 / 20 / 23 (60 min)', '18 / 22 (40 min)']
+];
+D.simPhaseTips = [
+  'First 3 minutes: read and skim.',
+  'Middle: answer what you know, then the calculations.',
+  'Last 2 minutes: fill every blank.'
+];
+D.simOffPaceTips = [
+  'Easy sim finishes early — the extra time rolls to the hard sim.',
+  'Easy sim runs over — stop at its checkpoint, guess, move on.',
+  'Misranked a sim — stick to its slot anyway.',
+  'Behind at a checkpoint — jump to the next phase.',
+  'A sim runs long — that’s what the 15-minute cushion is for.'
+];
 D.utahReqs = [
   ['Governing Body','Utah Division of Professional Licensing (DOPL) via NASBA','You apply through NASBA; Utah is the jurisdiction'],
   ['Minimum Education','120 semester hours','Bachelor’s degree level from a regionally accredited school'],
@@ -1425,6 +1465,37 @@ function renderCpa(){
 
   html += '<h2 class="sec">Exam day</h2><ul class="tips">'
     + D.examDay.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+
+  html += '<h2 class="sec">Simulation (TBS) time strategy</h2>'
+    + '<div class="note">Perfect MCQ alone (100%) is only worth about 50 points (0.50 &times; 99) &mdash; about 59 in ISC (0.60 &times; 99). '
+    + 'Passing is 75. Max your MCQ and you still need roughly 51 on sims (about 39 in ISC) &mdash; sims are not optional.</div>'
+    + '<h3 class="sub">Time budget per sim</h3>'
+    + '<div class="hint">240 minutes total. Hold back a 15-minute cushion you don&rsquo;t pre-assign &mdash; insurance for a sim that runs long.</div>'
+    + '<div class="tbl-wrap"><table><thead><tr><th>Section</th><th>Target (aim for this)</th><th>Ceiling (absolute max)</th></tr></thead><tbody>'
+    + D.simTimeTargets.map(function(r){ return '<tr><td style="min-width:60px;"><b>' + esc(r[0]) + '</b></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>'; }).join('')
+    + '</tbody></table></div>'
+    + '<div class="tipblock"><b>Target</b> — hit this on every sim and you finish with 15 minutes to spare. <b>Ceiling</b> — hit this on every sim and you finish with zero minutes left. '
+    + 'AUD math &mdash; Target: (240 &minus; 100 MCQ &minus; 15 cushion) &divide; 7 sims &asymp; 18 min. Ceiling: (240 &minus; 100 MCQ) &divide; 7 sims = 20 min.</div>'
+    + '<h3 class="sub">Overall approach</h3><ul class="tips">'
+    + D.simStrategyTips.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'
+    + '<h3 class="sub">Ranking sims &mdash; easiest first</h3>'
+    + '<div class="hint">Spend about 10 seconds per sim reading only the requirement. Score 1 point per &ldquo;easier&rdquo; signal below and start with the highest score; '
+    + 'ties go to the topic you know better. Never spend more than 30 seconds total scanning.</div>'
+    + '<div class="tbl-wrap"><table><thead><tr><th>Signal</th><th>Easier</th><th>Harder</th></tr></thead><tbody>'
+    + D.simEasySignals.map(function(r){ return '<tr><td style="min-width:70px;"><b>' + esc(r[0]) + '</b></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>'; }).join('')
+    + '</tbody></table></div>'
+    + '<h3 class="sub">Budget by testlet, not by sim</h3>'
+    + '<div class="hint">Easy sims get less time, hard sims get more &mdash; these splits already have the 15-minute cushion baked in.</div>'
+    + '<div class="tbl-wrap"><table><thead><tr><th>Section</th><th>3-sim testlet (easy / medium / hard)</th><th>2-sim testlet (easier / harder)</th></tr></thead><tbody>'
+    + D.simTestletBudget.map(function(r){ return '<tr><td style="min-width:60px;"><b>' + esc(r[0]) + '</b></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>'; }).join('')
+    + '</tbody></table></div>'
+    + '<div class="tipblock"><b>Example</b> — AUD, 3 sims, opened at 2:00 remaining: scan done ~1:59, easy done 1:44, medium done 1:26, hard done 1:05.</div>'
+    + '<h3 class="sub">Inside each sim</h3><ul class="tips">'
+    + D.simPhaseTips.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'
+    + '<h3 class="sub">If you fall off pace</h3><ul class="tips">'
+    + D.simOffPaceTips.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'
+    + '<div class="tipblock">It feels slower than it is. One minute into an 18-minute sim is only about 5% of your time. In Becker, set a timer, don&rsquo;t check it until it goes off, '
+    + 'and note where you were at minute 10 to see if you&rsquo;re actually slow.</div>';
 
   html += '<h2 class="sec">Utah requirements &amp; fees</h2>'
     + '<h3 class="sub">Requirements</h3>'
