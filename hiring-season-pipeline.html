@@ -1489,7 +1489,6 @@ function renderCpa(){
     + '<div class="tbl-wrap"><table><thead><tr><th>Section</th><th>3-sim testlet (easy / medium / hard)</th><th>2-sim testlet (easier / harder)</th></tr></thead><tbody>'
     + D.simTestletBudget.map(function(r){ return '<tr><td style="min-width:60px;"><b>' + esc(r[0]) + '</b></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td></tr>'; }).join('')
     + '</tbody></table></div>'
-    + '<div class="tipblock"><b>Example</b> — AUD, 3 sims, opened at 2:00 remaining: scan done ~1:59, easy done 1:44, medium done 1:26, hard done 1:05.</div>'
     + '<h3 class="sub">Inside each sim</h3><ul class="tips">'
     + D.simPhaseTips.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'
     + '<h3 class="sub">If you fall off pace</h3><ul class="tips">'
